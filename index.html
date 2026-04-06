@@ -83,11 +83,11 @@ input,select,textarea{font-family:inherit;outline:none;background:none;-webkit-a
 
 /* ── TOPBAR ── */
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
-.topbar{height:var(--topbar);flex-shrink:0;background:var(--bg1);border-bottom:1px solid var(--bd);display:flex;align-items:center;padding:0 20px;gap:12px}
+.topbar{height:var(--topbar);flex-shrink:0;background:var(--bg1);border-bottom:1px solid var(--bd);display:flex;align-items:center;padding:0 14px;gap:8px}
 
 /* TOPBAR BRAND — mostra Estudaki no lugar de Dashboard */
-.topbar-brand{display:flex;align-items:center;gap:8px;min-width:0;flex:1}
-.topbar-brand-name{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;background:var(--pg2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;white-space:nowrap}
+.topbar-brand{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.topbar-brand-name{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:800;background:var(--pg2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;white-space:nowrap;flex-shrink:0}
 @keyframes shimmer{0%{background-position:0% 50%}100%{background-position:200% 50%}}
 .topbar-page{font-size:.72rem;color:var(--t3);font-weight:600}
 .topbar-right{display:flex;align-items:center;gap:6px;margin-left:auto;flex-shrink:0}
@@ -124,8 +124,8 @@ input,select,textarea{font-family:inherit;outline:none;background:none;-webkit-a
 .card{background:var(--bg2);border:1px solid var(--bd);border-radius:var(--rl);padding:20px}
 .card-title{font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.7px;color:var(--t3);margin-bottom:16px;display:flex;align-items:center;gap:6px}
 
-.xp-nivel-mini{display:none;align-items:center;padding:5px 12px;border-radius:20px;background:rgba(251,191,36,.15);border:1.5px solid rgba(251,191,36,.4);gap:4px}
-.xp-nivel-mini span{font-family:'Syne',sans-serif;font-size:.78rem;font-weight:800;color:var(--gold)}
+.xp-nivel-mini{display:none;align-items:center;padding:3px 7px;border-radius:12px;background:rgba(251,191,36,.15);border:1px solid rgba(251,191,36,.3);gap:3px;flex-shrink:0;max-width:60px}
+.xp-nivel-mini span{font-size:.68rem;font-weight:800;color:var(--amber)}
 .badge{display:inline-flex;align-items:center;padding:4px 10px;border-radius:20px;font-size:.62rem;font-weight:800;letter-spacing:.4px}
 .b-exc{background:var(--ps);color:var(--p)}.b-foc{background:rgba(79,70,229,.14);color:#818cf8}
 .b-pro{background:var(--pks);color:var(--pink)}.b-otm{background:var(--gs);color:var(--green)}
@@ -365,46 +365,82 @@ textarea.form-input{resize:vertical;line-height:1.6}
 
 /* RESPONSIVE */
 @media(max-width:768px){
+  /* ── SIDEBAR ── */
   .sidebar{position:fixed;left:0;top:0;bottom:0;z-index:50;transform:translateX(-100%)}
   .sidebar.mobile-open{transform:translateX(0)}
   .sidebar.collapsed{width:var(--sidebar)}
   .sidebar.collapsed .logo-texts,.sidebar.collapsed .nav-label,.sidebar.collapsed .nav-group-label,.sidebar.collapsed .nav-badge{opacity:1;width:auto;overflow:visible}
-  .g4{grid-template-columns:1fr 1fr!important}.g3{grid-template-columns:1fr 1fr!important}
+
+  /* ── TOPBAR MOBILE — DEFINITIVO ── */
+  .topbar{padding:0 12px!important;gap:8px!important;height:52px!important;display:flex!important;align-items:center!important}
+  .hamburger{flex-shrink:0!important;order:1}
+  .topbar-brand{flex-shrink:0!important;order:2;display:flex!important;align-items:center!important;gap:6px!important;min-width:0;max-width:45vw}
+  #topbarAvatar{width:28px!important;height:28px!important;font-size:.9rem!important;flex-shrink:0!important}
+  .topbar-brand-name{font-size:.92rem!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;max-width:28vw!important}
+  .topbar-page{display:none!important}
+  .topbar-right{flex:1!important;order:3;display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:5px!important;min-width:0}
+  .xp-bar-wrap{display:none!important}
+  .xp-nivel-mini{display:flex!important;padding:2px 6px!important;font-size:.62rem!important;flex-shrink:0}
+  .user-bar{padding:3px 6px!important;gap:3px!important;flex-shrink:0}
+  .user-dot{width:6px!important;height:6px!important}
+  .user-name{display:none!important}
+  .topbar-btn-prim{padding:5px 8px!important;font-size:.7rem!important;flex-shrink:0}
+  .reg-btn-text{display:none!important}
+
+  /* ── CONTEÚDO ── */
+  .content{padding:12px!important}
+  .sec-title{font-size:1rem!important}
+  .sec-sub{font-size:.75rem!important}
+  .sec-hd{flex-wrap:wrap!important;gap:8px!important}
+  .card{padding:14px!important}
+  .card-title{font-size:.82rem!important}
+
+  /* ── GRIDS ── */
+  .g4{grid-template-columns:1fr 1fr!important}
+  .g3{grid-template-columns:1fr 1fr!important}
   .g2{grid-template-columns:1fr!important}
-  .week-grid{grid-template-columns:repeat(2,1fr)}
-  .form-row{grid-template-columns:1fr}
-  .sec-title{font-size:1.1rem!important}
-  .kpi-val{font-size:1.4rem!important}
-  .chart-wrap{height:160px!important}
+  .form-row{grid-template-columns:1fr!important}
   [style*="grid-column:span 2"]{grid-column:span 1!important}
   [style*="grid-column:span 3"]{grid-column:span 1!important}
+  .week-grid{grid-template-columns:repeat(2,1fr)!important}
+
+  /* ── KPIs ── */
+  .kpi-card{padding:12px!important}
+  .kpi-val{font-size:1.25rem!important}
+  .kpi-lbl{font-size:.62rem!important}
+  .chart-wrap{height:150px!important}
+
+  /* ── MODAIS ── */
+  .modal{width:calc(100vw - 16px)!important;max-width:100%!important;margin:8px!important;max-height:92vh!important}
+  .modal-body{padding:14px!important}
+  .modal-hd{padding:14px!important}
+  .modal-footer{padding:12px 14px!important}
+
+  /* ── GAMIFICAÇÃO ── */
   .badges-grid{grid-template-columns:repeat(2,1fr)!important}
-  .foco-ring{width:180px!important;height:180px!important}
-  .foco-ring svg{width:180px!important;height:180px!important}
-  .foco-time{font-size:2.4rem!important}
-  .modal{width:calc(100vw - 20px)!important;max-width:100%!important}
-  .level-card{padding:16px!important}
-  .assist-card{padding:14px!important}
-  .topbar-btn-prim span{display:none}
-  .topbar-page{display:none}
-  .reg-btn-text{display:none}
-  .xp-bar-wrap{display:none!important}
-  .xp-nivel-mini{display:flex!important}
-  .content{padding:14px!important}
-  .kpi-val{font-size:1.4rem!important}
-  .sec-title{font-size:1.1rem!important}
-  .chart-wrap{height:160px!important}
-  [style*="grid-column:span 2"]{grid-column:span 1!important}
+  .level-card{padding:14px!important}
+  .assist-card{padding:12px!important}
+
+  /* ── MODO FOCO ── */
+  .foco-ring{width:190px!important;height:190px!important}
+  .foco-ring svg{width:190px!important;height:190px!important}
+  .foco-time{font-size:2.6rem!important}
+  .foco-header{top:10px!important;left:8px!important;right:8px!important;gap:4px!important;flex-wrap:wrap!important}
+  .foco-proj-sel{font-size:.7rem!important;padding:5px 8px!important;flex:1!important;min-width:0!important;max-width:48%!important}
+  .foco-close{top:10px!important;right:10px!important}
+
+  /* ── CRONOGRAMA ── */
+  .crono-dia{min-width:0!important}
+  .crono-bloco-mat{font-size:.72rem!important}
 }
 @media(max-width:420px){
   .g4{grid-template-columns:1fr!important}
-  .g3{grid-template-columns:1fr!important}
-  .modal{max-width:100%!important;margin:8px!important}
+  .modal{width:calc(100vw - 12px)!important;margin:6px!important}
   .content{padding:10px!important}
-  .sec-hd{flex-direction:column!important;align-items:flex-start!important;gap:8px!important}
-  .topbar{padding:0 10px!important;gap:8px!important}
-  .kpi-card{padding:12px!important}
-  .card{padding:14px!important}
+  .topbar-brand-name{font-size:.85rem!important;max-width:25vw!important}
+  .xp-nivel-mini{font-size:.58rem!important;padding:2px 5px!important}
+  .kpi-val{font-size:1.15rem!important}
+  .sec-hd{flex-direction:column!important;align-items:flex-start!important;gap:6px!important}
 }
 .mobile-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:45}
 .hamburger{display:none;width:36px;height:36px;border-radius:var(--r);background:var(--bg3);border:1px solid var(--bd2);align-items:center;justify-content:center;flex-direction:column;gap:4px;cursor:pointer;flex-shrink:0}
@@ -435,13 +471,39 @@ textarea.form-input{resize:vertical;line-height:1.6}
 .btn-google{width:100%;padding:12px;border-radius:var(--r);border:1.5px solid var(--bd2);background:var(--bg3);color:var(--t1);font-size:.85rem;font-weight:700;display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;transition:var(--tr);font-family:inherit;margin-bottom:12px}
 .btn-google:hover{border-color:var(--bd3);background:var(--bg4)}
 .login-erro{background:var(--rs);border:1px solid rgba(239,68,68,.3);border-radius:var(--r);padding:10px 14px;font-size:.78rem;color:var(--red);margin-bottom:12px;display:none}
-.user-bar{display:flex;align-items:center;gap:8px;padding:6px 12px;border-radius:var(--r);border:1px solid var(--bd2);background:var(--bg3);cursor:pointer;transition:var(--tr)}
+.user-bar{display:flex;align-items:center;gap:6px;padding:5px 10px;border-radius:var(--r);border:1px solid var(--bd);cursor:pointer;transition:var(--tr);flex-shrink:0}
 .user-bar:hover{background:var(--bg4)}
 .user-avatar{width:26px;height:26px;border-radius:50%;background:var(--pg);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:800;color:#fff;flex-shrink:0}
 .user-name{font-size:.72rem;font-weight:600;color:var(--t2);max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .sync-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .sync-ok{background:var(--green)}.sync-loading{background:var(--amber);animation:pulse 1s infinite}.sync-err{background:var(--red)}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+.crono-dia{background:var(--bg2);border:1px solid var(--bd);border-radius:var(--rl);overflow:hidden}
+.crono-dia-header{background:var(--bg3);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bd)}
+.crono-dia-nome{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--t3)}
+.crono-dia-num{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:var(--t1)}
+.crono-dia-hoje .crono-dia-header{background:var(--ps)}
+.crono-dia-hoje .crono-dia-num{color:var(--p)}
+.crono-bloco-novo{background:var(--bg3);border-radius:var(--r);padding:12px;margin:8px;border-left:3px solid var(--p);display:flex;align-items:center;gap:10px}
+.crono-bloco-novo.concluido{border-left-color:var(--green);opacity:.7}
+.crono-bloco-mat{font-size:.82rem;font-weight:700;color:var(--t1)}
+.crono-bloco-top{font-size:.68rem;color:var(--t3);margin-top:2px}
+.crono-add-btn{display:flex;align-items:center;justify-content:center;gap:6px;margin:8px;padding:10px;border-radius:var(--r);border:1.5px dashed var(--bd2);color:var(--t4);font-size:.75rem;cursor:pointer;transition:var(--tr)}
+.crono-add-btn:hover{border-color:var(--p);color:var(--p);background:var(--ps)}
+.pwa-banner{position:fixed!important;bottom:20px!important;top:auto!important;left:50%!important;transform:translateX(-50%)!important;z-index:999!important;max-width:380px!important;width:calc(100vw - 24px)!important}
+@keyframes slideUp{from{transform:translateX(-50%) translateY(100px);opacity:0}to{transform:translateX(-50%) translateY(0);opacity:1}}
+.pwa-banner-hide{display:none!important}
+
+/* ── TIPOGRAFIA GLOBAL PADRONIZADA ── */
+.card-title{font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--t3);margin-bottom:12px}
+.sec-title{font-size:1.15rem;font-weight:800;color:var(--t1)}
+.sec-sub{font-size:.78rem;color:var(--t3);margin-top:2px}
+.form-label{font-size:.72rem;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;display:block}
+.form-input{font-size:.85rem}
+.form-select{font-size:.85rem}
+.btn-prim{font-size:.82rem;font-weight:700}
+.btn-ghost{font-size:.82rem;font-weight:600}
 </style>
 </head>
 <body>
@@ -728,14 +790,56 @@ textarea.form-input{resize:vertical;line-height:1.6}
   </div>
 </div>
 <!-- BANNER PWA INSTALL -->
+<!-- BANNER PWA INSTALL -->
 <div id="pwaBanner" class="pwa-banner pwa-banner-hide">
-  <div style="width:38px;height:38px;border-radius:10px;background:var(--pg);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0">🎓</div>
+  <div style="width:36px;height:36px;border-radius:10px;background:var(--pg);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0">🎓</div>
   <div style="flex:1;min-width:0">
-    <div style="font-size:.82rem;font-weight:800;color:var(--t1)">Instalar Estudaki</div>
-    <div style="font-size:.7rem;color:var(--t3)">Adicione à tela inicial — funciona offline!</div>
+    <div style="font-size:.8rem;font-weight:800;color:var(--t1)">Instalar Estudaki</div>
+    <div style="font-size:.66rem;color:var(--t3)">Adicione à tela inicial como um app</div>
   </div>
-  <button onclick="instalarPWA()" style="padding:8px 14px;border-radius:var(--r);background:var(--pg);color:#fff;font-size:.75rem;font-weight:700;cursor:pointer;white-space:nowrap">Instalar</button>
-  <button onclick="fecharPWA()" style="color:var(--t4);font-size:1.1rem;padding:4px;flex-shrink:0">✕</button>
+  <button onclick="instalarPWA()" style="padding:7px 12px;border-radius:var(--r);background:var(--pg);color:#fff;font-size:.72rem;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0">Instalar</button>
+  <button onclick="fecharPWA()" style="color:var(--t4);font-size:1.2rem;padding:8px;flex-shrink:0;line-height:1;min-width:36px;min-height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:var(--bg3)">✕</button>
+</div>
+
+<!-- Modal: Instruções PWA iOS -->
+<div class="overlay" id="mPWAIOS">
+  <div class="modal" style="max-width:380px">
+    <div class="modal-hd">
+      <div class="modal-title">📱 Instalar no iPhone</div>
+      <button class="modal-close" onclick="closeModal('mPWAIOS');fecharPWA()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;align-items:center;gap:12px;padding:12px;background:var(--bg3);border-radius:var(--rl)">
+          <div style="width:32px;height:32px;border-radius:50%;background:var(--pg);display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:800;color:#fff;flex-shrink:0">1</div>
+          <div>
+            <div style="font-size:.82rem;font-weight:700;color:var(--t1)">Toque no ícone Compartilhar</div>
+            <div style="font-size:.72rem;color:var(--t3)">O ícone ↑ na barra inferior do Safari</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;padding:12px;background:var(--bg3);border-radius:var(--rl)">
+          <div style="width:32px;height:32px;border-radius:50%;background:var(--pg);display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:800;color:#fff;flex-shrink:0">2</div>
+          <div>
+            <div style="font-size:.82rem;font-weight:700;color:var(--t1)">Role para baixo</div>
+            <div style="font-size:.72rem;color:var(--t3)">Procure a opção "Adicionar à Tela de Início"</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;padding:12px;background:var(--bg3);border-radius:var(--rl)">
+          <div style="width:32px;height:32px;border-radius:50%;background:var(--pg);display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:800;color:#fff;flex-shrink:0">3</div>
+          <div>
+            <div style="font-size:.82rem;font-weight:700;color:var(--t1)">Toque em "Adicionar"</div>
+            <div style="font-size:.72rem;color:var(--t3)">O Estudaki vai aparecer na sua tela inicial!</div>
+          </div>
+        </div>
+        <div style="padding:12px;background:var(--gs);border-radius:var(--rl);border:1px solid rgba(34,197,94,.2)">
+          <div style="font-size:.75rem;color:var(--green);font-weight:700">✅ Funciona como app nativo — sem precisar abrir o Safari</div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-prim full" onclick="closeModal('mPWAIOS');fecharPWA()">Entendi!</button>
+    </div>
+  </div>
 </div>
 <!-- TELA DE LOGIN -->
 <div id="loginScreen" class="login-screen">
@@ -814,11 +918,11 @@ textarea.form-input{resize:vertical;line-height:1.6}
           <span class="nav-label">Revisões SRS</span>
           <span class="nav-badge" id="nb-revisoes">0</span>
         </div>
-        <div class="nav-item" id="ni-cronograma-ia" onclick="goTo('cronograma-ia')">
-          <svg class="nav-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <div class="nav-item" id="ni-cronograma" onclick="goTo('cronograma-ia')">
+          <svg class="nav-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
           <span class="nav-label">Cronograma IA</span>
         </div>
-        <div class="nav-item" id="ni-cronograma" onclick="goTo('cronograma')">
+        <div style="display:none" id="ni-cronograma-ia">
           <svg class="nav-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="14" x2="8" y2="14" stroke-width="2.5"/><line x1="12" y1="14" x2="12" y2="14" stroke-width="2.5"/><line x1="16" y1="14" x2="16" y2="14" stroke-width="2.5"/></svg>
           <span class="nav-label">Cronograma</span>
         </div>
@@ -864,11 +968,9 @@ textarea.form-input{resize:vertical;line-height:1.6}
     <div class="topbar">
       <button class="hamburger" onclick="toggleSidebar()"><span></span><span></span><span></span></button>
       <div class="topbar-brand">
-        <div id="topbarAvatar" onclick="goTo('gami')" title="Gamificação" style="width:34px;height:34px;border-radius:50%;background:var(--pg);display:flex;align-items:center;justify-content:center;font-size:1.2rem;cursor:pointer;box-shadow:0 2px 8px rgba(124,58,237,.4);flex-shrink:0">🎓</div>
+        <div id="topbarAvatar" onclick="goTo('gami')" title="Gamificação" style="width:32px;height:32px;border-radius:50%;background:var(--pg);display:flex;align-items:center;justify-content:center;font-size:1.1rem;cursor:pointer;flex-shrink:0">🎓</div>
         <div style="display:none;width:0;height:0;overflow:hidden"><svg width="30" height="30" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="tg1" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#a78bfa"/><stop offset="100%" stop-color="#6d28d9"/></radialGradient><linearGradient id="tg2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#4f46e5"/></linearGradient></defs><circle cx="22" cy="20" r="12" fill="url(#tg1)"/><circle cx="19" cy="19" r="1.5" fill="white" opacity="0.9"/><circle cx="25" cy="19" r="1.5" fill="white" opacity="0.9"/><path d="M18 23 Q22 27 26 23" stroke="white" stroke-width="1.8" stroke-linecap="round" fill="none"/><rect x="13" y="10" width="18" height="3" rx="1" fill="#4f46e5"/><polygon points="22,5 30,10 14,10" fill="#6d28d9"/><line x1="30" y1="10" x2="32" y2="15" stroke="#fbbf24" stroke-width="1.5" stroke-linecap="round"/><circle cx="32" cy="16" r="1.5" fill="#fbbf24"/><rect x="14" y="32" width="16" height="10" rx="2" fill="url(#tg2)"/></svg></div>
-        <div class="topbar-brand-name">Estudaki</div>
-        <span style="color:var(--t4);margin:0 4px">·</span>
-        <span class="topbar-page" id="topbarPage">Dashboard</span>
+        <div class="topbar-brand-name" style="white-space:nowrap;overflow:visible">Estudaki</div>
       </div>
       <div class="topbar-right">
         <div class="xp-bar-wrap" id="topbarXP">
@@ -984,21 +1086,21 @@ textarea.form-input{resize:vertical;line-height:1.6}
       <!-- CRONOGRAMA AUTOMÁTICO IA -->
       <div class="view" id="view-cronograma-ia">
         <div class="sec-hd">
-          <div><div class="sec-title">🤖 Cronograma Automático</div><div class="sec-sub">A IA distribui suas matérias automaticamente até a data da prova</div></div>
+          <div><div class="sec-title">🤖 Cronograma Semanal IA</div><div class="sec-sub">Gerado com revezamento automático — edite à vontade</div></div>
+          <button class="btn-prim" onclick="abrirConfigCrono()" style="font-size:.78rem" id="btnGerarCrono">🤖 Gerar Semana</button>
         </div>
-        <div class="card" style="margin-bottom:20px">
-          <div class="card-title">⚙️ Configure seu plano</div>
-          <div class="grid g2" style="margin-bottom:16px">
-            <div class="form-group"><label class="form-label">Projeto / Concurso</label><select class="form-select" id="cronoIAProjeto" onchange="cronoIAUpdateMats()"><option value="">Selecione o concurso</option></select></div>
-            <div class="form-group"><label class="form-label">Data da Prova</label><input class="form-input" type="date" id="cronoIAData"></div>
+        <!-- Alerta semana nova (sab/dom) -->
+        <div id="alertaSemanaNovaCrono" style="display:none;background:linear-gradient(135deg,var(--bg2),rgba(124,58,237,.1));border:1.5px solid rgba(124,58,237,.3);border-radius:var(--rl);padding:14px;margin-bottom:16px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-size:1.3rem">🗓</span>
+            <div style="flex:1"><div style="font-size:.85rem;font-weight:800;color:var(--t1)">Nova semana chegando!</div><div style="font-size:.72rem;color:var(--t3)">Gere o cronograma para a próxima semana</div></div>
+            <button onclick="abrirConfigCrono()" style="padding:7px 14px;border-radius:var(--r);background:var(--pg);color:#fff;font-size:.72rem;font-weight:700;cursor:pointer">Gerar</button>
           </div>
-          <div class="grid g2" style="margin-bottom:16px">
-            <div class="form-group"><label class="form-label">Horas por dia</label><select class="form-select" id="cronoIAHoras"><option value="1">1h</option><option value="2" selected>2h</option><option value="3">3h</option><option value="4">4h</option><option value="5">5h</option><option value="6">6h</option><option value="8">8h</option></select></div>
-            <div class="form-group"><label class="form-label">Dias por semana</label><select class="form-select" id="cronoIADias"><option value="5" selected>5 dias</option><option value="6">6 dias</option><option value="7">7 dias</option><option value="3">3 dias</option></select></div>
-          </div>
-          <button class="btn-prim" onclick="gerarCronoIA()" style="width:100%">🤖 Gerar Cronograma</button>
         </div>
-        <div id="cronoIAResultado"></div>
+        <!-- Grade da semana -->
+        <div id="cronoIAGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-bottom:20px"></div>
+        <!-- Resumo e recomendações -->
+        <div id="cronoIAResumo"></div>
       </div>
 
 <!-- CRONOGRAMA V2 -->
@@ -1477,7 +1579,7 @@ function prevMonth(){const now=new Date();now.setMonth(now.getMonth()-1);const y
 /* ════════════════════════════════════════
    NAVIGATION
 ════════════════════════════════════════ */
-const viewTitles={dashboard:'Dashboard',projetos:'Projetos',historico:'Histórico',ranking:'Ranking',inteligencia:'Painel de Análise',assistente:'Assistente de Estudo',revisoes:'Revisões SRS','cronograma-ia':'Cronograma IA',cronograma:'Cronograma',lembretes:'Lembretes',anotacoes:'Anotações',gami:'Gamificação',mapa:'Mapa de Progresso',config:'Configurações'};
+const viewTitles={dashboard:'Dashboard',projetos:'Projetos',historico:'Histórico',ranking:'Ranking',inteligencia:'Painel de Análise',assistente:'Assistente de Estudo',revisoes:'Revisões SRS','cronograma-ia':'Cronograma',cronograma:'Cronograma',lembretes:'Lembretes',anotacoes:'Anotações',gami:'Gamificação',mapa:'Mapa de Progresso',config:'Configurações'};
 function goTo(view){
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
@@ -1498,7 +1600,14 @@ function goTo(view){
   else if(view==='gami'){renderGami();renderAvatares();}
   else if(view==='mapa')renderMapa();
   else if(view==='config')renderConfig();
-  if(window.innerWidth<=768){document.getElementById('sidebar').classList.remove('mobile-open');document.getElementById('mobileOverlay').style.display='none'}
+  // Fechar sidebar mobile SEMPRE ao navegar
+  const sb = document.getElementById('sidebar');
+  const mo = document.getElementById('mobileOverlay');
+  if(sb) sb.classList.remove('mobile-open');
+  if(mo) mo.style.display='none';
+  // Scroll para o topo
+  const content = document.getElementById('mainContent');
+  if(content) content.scrollTop = 0;
 }
 function toggleSidebar(){
   const sb=document.getElementById('sidebar');
@@ -2518,7 +2627,250 @@ function executarImpressao(){
   } else {
     conteudo=`<h2>🧠 Insights — ${projLabel}</h2><div class="kpi-grid"><div class="kpi"><div class="kpi-v">${fmtMin(totalMin(ss))}</div><div class="kpi-l">Total</div></div><div class="kpi"><div class="kpi-v">${totalMin(ss)>0?Math.round(totalQ(ss)/totalMin(ss)*60):0}</div><div class="kpi-l">Q/hora</div></div><div class="kpi"><div class="kpi-v">${ss.length>0?fmtMin(Math.round(totalMin(ss)/ss.length)):0}</div><div class="kpi-l">Média/Sessão</div></div><div class="kpi"><div class="kpi-v">${uniqueDays(ss)}</div><div class="kpi-l">Dias</div></div></div><h2>🏆 Ranking</h2><table><tr><th>Pos.</th><th>Matéria</th><th>Horas</th><th>%</th><th>Questões</th><th>% Acertos</th></tr>${ms.map((m,i)=>`<tr><td>${['🥇','🥈','🥉'][i]||i+1}</td><td>${m.mat}</td><td>${fmtMin(m.min)}</td><td>${Math.round(m.min/(totalMin(ss)||1)*100)}%</td><td>${m.qtd}</td><td>${m.qtd>0?Math.round(m.acertos/m.qtd*100)+'%':'—'}</td></tr>`).join('')}</table>`;
   }
-  win.document.write(`<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><title>Estudaki — ${projLabel}</title><style>body{font-family:Arial,sans-serif;padding:32px;color:#111;max-width:900px;margin:0 auto}h1{color:#7c3aed;font-size:22px}h2{color:#4f46e5;font-size:16px;margin:24px 0 12px;border-bottom:2px solid #e5e7eb;padding-bottom:6px}.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px}.kpi{background:#f5f3ff;border-radius:10px;padding:16px;text-align:center}.kpi-v{font-size:22px;font-weight:800;color:#7c3aed;margin-bottom:4px}.kpi-l{font-size:11px;color:#666;text-transform:uppercase}table{width:100%;border-collapse:collapse;font-size:13px}th{background:#7c3aed;color:#fff;padding:10px 12px;text-align:left;font-size:12px}td{padding:8px 12px;border-bottom:1px solid #e5e7eb}tr:nth-child(even) td{background:#f9f9ff}.footer{margin-top:32px;text-align:center;color:#999;font-size:12px;border-top:1px solid #e5e7eb;padding-top:16px}@media print{button{display:none}}</style></head><body><h1>📖 Estudaki — Relatório de Estudos</h1><p style="color:#666;font-size:13px">Gerado em ${new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'})} · ${projLabel}</p>${conteudo}<div class="footer">Estudaki v5.1 — Sistema Premium de Controle de Performance</div><button onclick="window.print()" style="position:fixed;top:20px;right:20px;padding:10px 20px;background:#7c3aed;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:14px;font-weight:700">🖨️ Imprimir / Salvar PDF</button></body></html>`);
+  win.document.write(`<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><title>Estudaki — ${projLabel}</title><style>body{font-family:Arial,sans-serif;padding:32px;color:#111;max-width:900px;margin:0 auto}h1{color:#7c3aed;font-size:22px}h2{color:#4f46e5;font-size:16px;margin:24px 0 12px;border-bottom:2px solid #e5e7eb;padding-bottom:6px}.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px}.kpi{background:#f5f3ff;border-radius:10px;padding:16px;text-align:center}.kpi-v{font-size:22px;font-weight:800;color:#7c3aed;margin-bottom:4px}.kpi-l{font-size:11px;color:#666;text-transform:uppercase}table{width:100%;border-collapse:collapse;font-size:13px}th{background:#7c3aed;color:#fff;padding:10px 12px;text-align:left;font-size:12px}td{padding:8px 12px;border-bottom:1px solid #e5e7eb}tr:nth-child(even) td{background:#f9f9ff}.footer{margin-top:32px;text-align:center;color:#999;font-size:12px;border-top:1px solid #e5e7eb;padding-top:16px}
+
+@media(max-width:390px){
+  /* iPhone 11/12/13 — 375-390px */
+  .topbar{padding:0 10px!important;gap:6px!important}
+  .topbar-brand-name{font-size:.82rem!important;max-width:22vw!important}
+  #topbarAvatar{width:26px!important;height:26px!important}
+  .xp-nivel-mini{font-size:.56rem!important;padding:1px 5px!important}
+  .topbar-btn-prim{padding:4px 7px!important;font-size:.65rem!important}
+  .user-bar{padding:2px 5px!important}
+  .kpi-card{padding:10px!important}
+  .kpi-val{font-size:1.1rem!important}
+  .g4{grid-template-columns:1fr 1fr!important}
+}
+
+@media(max-width:375px){
+  /* iPhone 11 exato */
+  .topbar-brand-name{font-size:.8rem!important;max-width:90px!important}
+  .xp-nivel-mini span{font-size:.54rem!important}
+  .topbar-btn-prim span{display:none!important}
+  .g4{grid-template-columns:1fr 1fr!important}
+  .kpi-val{font-size:1.05rem!important}
+}
+@media(max-width:380px){
+  .topbar-brand-name{display:none!important}
+  .g4{grid-template-columns:1fr!important}
+  .content{padding:8px!important}
+  .card{padding:12px!important}
+}
+@media print{button{display:none}}</style></head><body><h1>📖 Estudaki — Relatório de Estudos</h1><p style="color:#666;font-size:13px">Gerado em ${new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'})} · ${projLabel}</p>${conteudo}<div class="footer">Estudaki v5.1 — Sistema Premium de Controle de Performance</div><button onclick="window.print()" style="position:fixed;top:20px;right:20px;padding:10px 20px;background:#7c3aed;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:14px;font-weight:700">🖨️ Imprimir / Salvar PDF</button>
+<!-- Modal: Seletor de Edital -->
+<div class="overlay" id="mEditalSeletor">
+  <div class="modal" style="max-width:520px;max-height:85vh;display:flex;flex-direction:column">
+    <div class="modal-hd">
+      <div class="modal-title">📋 Escolher Edital Pronto</div>
+      <button class="modal-close" onclick="closeModal('mEditalSeletor')">✕</button>
+    </div>
+    <div class="modal-body" style="overflow-y:auto;flex:1" id="editalSeletorConteudo"></div>
+    <div style="padding:16px;border-top:1px solid var(--bd)">
+      <button class="btn-ghost" onclick="closeModal('mEditalSeletor')" style="width:100%;justify-content:center">Cancelar — criar manualmente</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: Gerar Cronograma -->
+<div class="overlay" id="mGerarCrono">
+  <div class="modal" style="max-width:500px">
+    <div class="modal-hd">
+      <div class="modal-title">🤖 Gerar Cronograma com IA</div>
+      <button class="modal-close" onclick="closeModal('mGerarCrono')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Projeto / Concurso</label>
+        <select class="form-select" id="gcProjeto"></select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Dias de estudo por semana</label>
+          <select class="form-select" id="gcDias">
+            <option value="3">3 dias (Seg/Qua/Sex)</option>
+            <option value="4">4 dias (Seg/Ter/Qui/Sex)</option>
+            <option value="5" selected>5 dias (Seg a Sex)</option>
+            <option value="6">6 dias (Seg a Sáb)</option>
+            <option value="7">7 dias (todos)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Horas por dia</label>
+          <select class="form-select" id="gcHoras">
+            <option value="1">1 hora</option>
+            <option value="2" selected>2 horas</option>
+            <option value="3">3 horas</option>
+            <option value="4">4 horas</option>
+            <option value="5">5 horas</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Matérias por dia</label>
+        <div class="qbtns">
+          <button class="qbtn active" id="gcMat1" onclick="setGcMats(1,this)">1 matéria</button>
+          <button class="qbtn" id="gcMat2" onclick="setGcMats(2,this)">2 matérias</button>
+          <button class="qbtn" id="gcMat3" onclick="setGcMats(3,this)">3 matérias</button>
+        </div>
+      </div>
+      <div style="padding:12px;background:var(--bg3);border-radius:var(--rl);font-size:.75rem;color:var(--t3);margin-top:8px">
+        💡 A IA prioriza matérias com menor aproveitamento e que não são estudadas há mais tempo
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-ghost" onclick="closeModal('mGerarCrono')">Cancelar</button>
+      <button class="btn-prim" onclick="gerarCronogramaSemanal()">🤖 Gerar Cronograma</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: Registrar do Cronograma -->
+<div class="overlay" id="mRegCrono">
+  <div class="modal" style="max-width:460px">
+    <div class="modal-hd">
+      <div class="modal-title" id="mRegCronoTitle">✅ Registrar Estudo</div>
+      <button class="modal-close" onclick="closeModal('mRegCrono')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div style="background:var(--ps);border-radius:var(--rl);padding:12px;margin-bottom:16px;font-size:.78rem;color:var(--p)">
+        📋 Confirme ou edite o que você estudou hoje
+      </div>
+      <input type="hidden" id="rcBlocoId">
+      <div class="form-group">
+        <label class="form-label">Matéria estudada</label>
+        <input class="form-input" type="text" id="rcMateria" placeholder="Ex: Direito Penal">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Tópico específico</label>
+        <input class="form-input" type="text" id="rcTopico" placeholder="Ex: Art. 157 — Roubo (opcional)">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Tipo de estudo</label>
+          <select class="form-select" id="rcTipo">
+            <option>Teoria</option><option>Questões</option><option>Revisão</option>
+            <option>Simulado</option><option>Videoaula</option><option>Leitura</option>
+            <option>Resumo</option><option>Mapa Mental</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tempo estudado (min)</label>
+          <input class="form-input" type="number" id="rcMin" placeholder="Ex: 60" min="1">
+          <div class="qbtns"><button class="qbtn" onclick="document.getElementById('rcMin').value=30">30min</button><button class="qbtn" onclick="document.getElementById('rcMin').value=60">1h</button><button class="qbtn" onclick="document.getElementById('rcMin').value=90">1h30</button><button class="qbtn" onclick="document.getElementById('rcMin').value=120">2h</button></div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Questões resolvidas</label>
+          <input class="form-input" type="number" id="rcQtd" placeholder="0" min="0">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Questões acertadas</label>
+          <input class="form-input" type="number" id="rcAcertos" placeholder="0" min="0">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Observações</label>
+        <textarea class="form-input" id="rcObs" placeholder="Como foi o estudo? Dificuldades?" style="height:60px;resize:none"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-ghost" onclick="closeModal('mRegCrono')">Cancelar</button>
+      <button class="btn-prim" onclick="salvarRegistroCronograma()">✅ Salvar no Histórico</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: Configurar Cronograma IA -->
+<div class="overlay" id="mConfigCrono">
+  <div class="modal" style="max-width:480px">
+    <div class="modal-hd">
+      <div class="modal-title">🤖 Configurar Cronograma</div>
+      <button class="modal-close" onclick="closeModal('mConfigCrono')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Projeto / Concurso</label>
+        <select class="form-select" id="ccProjeto"></select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Horas por dia</label>
+          <select class="form-select" id="ccHoras">
+            <option value="1">1h/dia</option>
+            <option value="2" selected>2h/dia</option>
+            <option value="3">3h/dia</option>
+            <option value="4">4h/dia</option>
+            <option value="5">5h/dia</option>
+            <option value="6">6h/dia</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Dias por semana</label>
+          <select class="form-select" id="ccDias">
+            <option value="3">3 dias</option>
+            <option value="4">4 dias</option>
+            <option value="5" selected>5 dias (Seg-Sex)</option>
+            <option value="6">6 dias (Seg-Sáb)</option>
+            <option value="7">7 dias</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Matérias por dia</label>
+        <div class="qbtns" id="ccMatsQtdBtns">
+          <button class="qbtn" onclick="setCCMats(1,this)">1 matéria</button>
+          <button class="qbtn active" onclick="setCCMats(2,this)">2 matérias</button>
+          <button class="qbtn" onclick="setCCMats(3,this)">3 matérias</button>
+        </div>
+      </div>
+      <div style="background:var(--bg3);border-radius:var(--rl);padding:12px;font-size:.75rem;color:var(--t3)">
+        💡 A IA prioriza matérias com menor aproveitamento e que foram estudadas há mais tempo. Você pode editar qualquer bloco depois.
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-ghost" onclick="closeModal('mConfigCrono')">Cancelar</button>
+      <button class="btn-prim" onclick="gerarCronoSemanal()">🤖 Gerar Cronograma</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: Editar bloco do cronograma -->
+<div class="overlay" id="mEditBloco">
+  <div class="modal" style="max-width:400px">
+    <div class="modal-hd">
+      <div class="modal-title">✏️ Editar Bloco</div>
+      <button class="modal-close" onclick="closeModal('mEditBloco')">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="ebBlocoRef">
+      <div class="form-group">
+        <label class="form-label">Matéria</label>
+        <input class="form-input" type="text" id="ebMateria" placeholder="Ex: Língua Portuguesa">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Tópico (opcional)</label>
+        <input class="form-input" type="text" id="ebTopico" placeholder="Ex: Interpretação de texto">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Horas</label>
+        <select class="form-select" id="ebHoras">
+          <option value="0.5">30min</option>
+          <option value="1" selected>1h</option>
+          <option value="1.5">1h30</option>
+          <option value="2">2h</option>
+          <option value="3">3h</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-danger" onclick="excluirBloco()">🗑 Excluir</button>
+      <button class="btn-ghost" onclick="closeModal('mEditBloco')">Cancelar</button>
+      <button class="btn-prim" onclick="salvarEdicaoBloco()">Salvar</button>
+    </div>
+  </div>
+</div>
+</body></html>`);
   win.document.close();
 }
 
@@ -3200,13 +3552,13 @@ window.addEventListener('beforeinstallprompt', e => {
   }, 3000);
 });
 function instalarPWA(){
-  if(!pwaPrompt) {
-    // iOS — mostrar instruções
-    alert('Para instalar no iPhone:\n\n1. Toque no ícone Compartilhar ↑\n2. Role para baixo\n3. Toque em "Adicionar à Tela de Início"\n4. Confirme "Adicionar"\n\nO app vai aparecer na sua tela como um aplicativo!');
-    fecharPWA(); return;
+  if(!pwaPrompt){
+    // iOS — abrir modal com passo a passo
+    openModal('mPWAIOS');
+    return;
   }
   pwaPrompt.prompt();
-  pwaPrompt.userChoice.then(r => { if(r.outcome==='accepted') fecharPWA(); });
+  pwaPrompt.userChoice.then(r=>{if(r.outcome==='accepted')fecharPWA();});
 }
 function fecharPWA(){
   const b = document.getElementById('pwaBanner');
@@ -3345,16 +3697,366 @@ function updateNavBadgeSRS(){
 /* ════════════════════════════════════════
    CRONOGRAMA AUTOMÁTICO IA
 ════════════════════════════════════════ */
-function renderCronoIA(){
-  const sel = document.getElementById('cronoIAProjeto');
-  if(sel){
-    sel.innerHTML = '<option value="">Selecione o concurso</option>' +
-      ST.projects.map(p=>`<option value="${p.id}">${p.emoji} ${p.nome}</option>`).join('');
-  }
-  // Data mínima = hoje
-  const di = document.getElementById('cronoIAData');
-  if(di) di.min = today();
+
+/* ════════════════════════════════════════
+   CRONOGRAMA IA COMPLETO v7.4
+════════════════════════════════════════ */
+let ccMatsQtd = 2; // padrão 2 matérias/dia
+let ebBlocoData = null;
+
+function setCCMats(n, btn){
+  ccMatsQtd = n;
+  document.querySelectorAll('#ccMatsQtdBtns .qbtn').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
 }
+
+function abrirConfigCrono(){
+  const sel = document.getElementById('ccProjeto');
+  if(sel) sel.innerHTML = '<option value="">Selecione</option>' +
+    ST.projects.map(p=>`<option value="${p.id}">${p.emoji} ${p.nome}</option>`).join('');
+  // Restaurar configuração anterior se existir
+  if(ST.sched?.config){
+    const c = ST.sched.config;
+    if(document.getElementById('ccHoras')) document.getElementById('ccHoras').value = c.horas||2;
+    if(document.getElementById('ccDias')) document.getElementById('ccDias').value = c.dias||5;
+    if(c.projId) document.getElementById('ccProjeto').value = c.projId;
+    setCCMats(c.mats||2);
+  }
+  openModal('mConfigCrono');
+}
+
+function gerarCronoSemanal(){
+  const projId = document.getElementById('ccProjeto')?.value;
+  const horas = parseFloat(document.getElementById('ccHoras')?.value||2);
+  const dias = parseInt(document.getElementById('ccDias')?.value||5);
+
+  if(!projId){ showToast('Selecione um projeto','err'); return; }
+  const proj = getP(projId);
+  if(!proj||!proj.materias.length){ showToast('Projeto sem matérias','err'); return; }
+
+  // Salvar config
+  if(!ST.sched) ST.sched={blocks:{}};
+  ST.sched.config = {projId, horas, dias, mats:ccMatsQtd};
+
+  // Calcular pesos com base em registros
+  const pesos = proj.materias.map(mat=>{
+    const ss = ST.sessions.filter(s=>s.projetoId===projId&&s.materia===mat);
+    const totalQ = ss.reduce((a,s)=>a+(s.qtd||0),0);
+    const taxa = totalQ>0 ? ss.reduce((a,s)=>a+(s.acertos||0),0)/totalQ*100 : 50;
+    const ultimaData = ss.length ? ss.sort((a,b)=>b.data.localeCompare(a.data))[0].data : '2000-01-01';
+    const diasSem = Math.floor((new Date()-new Date(ultimaData+'T00:00:00'))/86400000);
+    // Peso: matéria com baixa taxa e não estudada há mais tempo = mais prioritária
+    const peso = (100-Math.min(taxa,90))*0.6 + Math.min(diasSem,21)*1.5;
+    return {mat, peso, taxa:Math.round(taxa), diasSem};
+  }).sort((a,b)=>b.peso-a.peso);
+
+  // Mapear dias da semana
+  const diasMap = {3:[1,3,5], 4:[1,2,4,5], 5:[1,2,3,4,5], 6:[1,2,3,4,5,6], 7:[0,1,2,3,4,5,6]};
+  const diasAtivos = diasMap[dias]||[1,2,3,4,5];
+
+  // Gerar semana atual com REVEZAMENTO — nunca a mesma matéria em dias consecutivos
+  const now = new Date();
+  const dow = now.getDay();
+  let matIdx = 0;
+  let ultimasUsadas = [];
+
+  diasAtivos.forEach(dia=>{
+    const d = new Date(now);
+    d.setDate(d.getDate()-dow+dia);
+    const ds = d.toISOString().slice(0,10);
+
+    // Verificar blocos já concluídos nesse dia
+    const jaConcluidos = (ST.sched.blocks[ds]||[]).filter(b=>b.feito);
+
+    // Selecionar matérias com revezamento
+    const blocosDia = [];
+    let tentativas = 0;
+    let idx = matIdx;
+    while(blocosDia.length < ccMatsQtd && tentativas < pesos.length*2){
+      const mat = pesos[idx%pesos.length].mat;
+      // Não repetir última matéria usada (revezamento)
+      if(!ultimasUsadas.slice(-1).includes(mat)){
+        blocosDia.push({
+          id: Math.random().toString(36).slice(2),
+          projetoId: projId,
+          materia: mat,
+          topico: '',
+          horas: Math.round(horas/ccMatsQtd*10)/10,
+          feito: false,
+          data: ds
+        });
+        ultimasUsadas.push(mat);
+        if(ultimasUsadas.length>3) ultimasUsadas.shift();
+        idx++;
+      } else {
+        idx++;
+      }
+      tentativas++;
+    }
+    matIdx = (matIdx+ccMatsQtd)%pesos.length;
+    ST.sched.blocks[ds] = [...jaConcluidos, ...blocosDia];
+  });
+
+  // Dias de folga (não nos diasAtivos)
+  for(let i=0;i<7;i++){
+    const d = new Date(now);
+    d.setDate(d.getDate()-dow+i);
+    const ds = d.toISOString().slice(0,10);
+    if(!diasAtivos.includes(i) && !ST.sched.blocks[ds]?.length){
+      ST.sched.blocks[ds] = [{
+        id:'folga-'+i, projetoId:projId, materia:'📴 Folga',
+        topico:'', horas:0, feito:false, data:ds, folga:true
+      }];
+    }
+  }
+
+  save();
+  closeModal('mConfigCrono');
+  renderCronoIA();
+  showToast('Cronograma da semana gerado! 🤖');
+}
+
+function renderCronoIA(){
+  // Grid da semana
+  renderCronoIASemana();
+  // Alerta sab/dom
+  const dow = new Date().getDay();
+  const al = document.getElementById('alertaSemanaNovaCrono');
+  if(al) al.style.display=(dow===0||dow===6)?'block':'none';
+  // Resumo + recomendações
+  renderCronoResumo();
+}
+
+function renderCronoIASemana(){
+  const grid = document.getElementById('cronoIAGrid');
+  if(!grid) return;
+  const now = new Date();
+  const dow = now.getDay();
+  const diasNomes = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+  const meses = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+  let html = '';
+  let temBlocos = false;
+
+  for(let i=0;i<7;i++){
+    const d = new Date(now);
+    d.setDate(d.getDate()-dow+i);
+    const ds = d.toISOString().slice(0,10);
+    const blocos = (ST.sched?.blocks?.[ds]||[]).filter(b=>!b.folga);
+    const folga = (ST.sched?.blocks?.[ds]||[]).some(b=>b.folga);
+    if(blocos.length) temBlocos = true;
+    const isHoje = ds===today();
+    const dataLabel = `${d.getDate()}/${meses[d.getMonth()]}`;
+
+    html += `<div class="crono-dia ${isHoje?'crono-dia-hoje':''}" style="min-width:0">
+      <div class="crono-dia-header">
+        <div>
+          <div class="crono-dia-nome" style="font-size:.65rem">${diasNomes[i]}</div>
+          <div class="crono-dia-num" style="font-size:1rem">${dataLabel}</div>
+        </div>
+        ${isHoje?'<span style="font-size:.55rem;font-weight:800;padding:2px 6px;border-radius:20px;background:var(--pg);color:#fff">HOJE</span>':''}
+      </div>
+      <div style="padding:6px;min-height:60px">
+        ${folga?`<div style="text-align:center;padding:12px 6px;color:var(--t4);font-size:.68rem">📴 Folga</div>`:''}
+        ${blocos.map(b=>`
+          <div class="crono-bloco-novo ${b.feito?'concluido':''}" style="padding:8px;margin:4px 0;flex-direction:column;align-items:flex-start;gap:4px">
+            <div style="display:flex;width:100%;align-items:center;gap:4px">
+              <div style="flex:1;min-width:0">
+                <div class="crono-bloco-mat" style="font-size:.72rem">${b.materia}</div>
+                ${b.topico?`<div class="crono-bloco-top" style="font-size:.6rem">📌 ${b.topico}</div>`:''}
+                <div class="crono-bloco-top" style="font-size:.6rem">${b.horas}h</div>
+              </div>
+              <button onclick="abrirEditBloco('${b.id}','${ds}')" style="padding:3px 5px;border-radius:6px;background:var(--bg4);color:var(--t3);font-size:.6rem;cursor:pointer;flex-shrink:0">✏️</button>
+            </div>
+            ${!b.feito?`<button onclick="abrirRegistroCronograma('${b.id}','${ds}')"
+              style="width:100%;padding:5px;border-radius:6px;background:var(--pg);color:#fff;font-size:.65rem;font-weight:700;cursor:pointer;text-align:center">✓ Estudei</button>`
+            :`<div style="font-size:.6rem;color:var(--green);font-weight:700">✓ Concluído</div>`}
+          </div>
+        `).join('')}
+        ${!blocos.length&&!folga?`<div style="text-align:center;padding:12px 4px;color:var(--t4);font-size:.65rem">Livre</div>`:''}
+      </div>
+    </div>`;
+  }
+
+  if(!temBlocos){
+    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px 20px;background:var(--bg2);border-radius:var(--rl);border:1px solid var(--bd)">
+      <div style="font-size:2rem;margin-bottom:10px">🤖</div>
+      <div style="font-size:.9rem;font-weight:700;color:var(--t1);margin-bottom:6px">Nenhum cronograma ainda</div>
+      <div style="font-size:.75rem;color:var(--t3);margin-bottom:16px">Clique em "Gerar Semana" para a IA montar seu cronograma com revezamento automático</div>
+      <button onclick="abrirConfigCrono()" style="padding:10px 24px;border-radius:var(--r);background:var(--pg);color:#fff;font-size:.82rem;font-weight:700;cursor:pointer">🤖 Gerar Semana</button>
+    </div>`;
+  } else {
+    grid.innerHTML = html;
+  }
+}
+
+function renderCronoResumo(){
+  const el = document.getElementById('cronoIAResumo');
+  if(!el) return;
+
+  const config = ST.sched?.config;
+  if(!config) return;
+
+  const proj = getP(config.projId);
+  if(!proj) return;
+
+  // Calcular estatísticas reais
+  const mats = proj.materias;
+  const temDados = ST.sessions.filter(s=>s.projetoId===config.projId).length > 0;
+
+  // Distribuição por matéria
+  const distrib = mats.map(mat=>{
+    const ss = ST.sessions.filter(s=>s.projetoId===config.projId&&s.materia===mat);
+    const totalQ = ss.reduce((a,s)=>a+(s.qtd||0),0);
+    const taxa = totalQ>0 ? Math.round(ss.reduce((a,s)=>a+(s.acertos||0),0)/totalQ*100) : null;
+    const mins = ss.reduce((a,s)=>a+(s.min||0),0);
+    return {mat, taxa, mins, sessoes:ss.length};
+  }).sort((a,b)=>(a.taxa??50)-(b.taxa??50));
+
+  // Recomendações baseadas em dados reais
+  const comDados = distrib.filter(d=>d.sessoes>0);
+  const semDados = distrib.filter(d=>d.sessoes===0);
+  const fracas = comDados.filter(d=>d.taxa!==null&&d.taxa<60);
+  const fortes = comDados.filter(d=>d.taxa!==null&&d.taxa>=80);
+
+  el.innerHTML = `
+    <!-- Distribuição por matéria -->
+    <div class="card" style="margin-bottom:16px">
+      <div class="card-title">📊 Aproveitamento por Matéria</div>
+      ${!temDados?`<div style="padding:16px;text-align:center;color:var(--t3);font-size:.78rem">
+        📝 Registre suas sessões de estudo para ver seu aproveitamento por matéria
+      </div>`:`
+      <div style="font-size:.72rem;color:var(--t3);margin-bottom:12px">As barras crescem conforme você registra estudos</div>
+      ${distrib.map(d=>`
+        <div style="margin-bottom:10px">
+          <div style="display:flex;justify-content:space-between;margin-bottom:3px">
+            <span style="font-size:.78rem;font-weight:700;color:var(--t1)">${d.mat}</span>
+            <span style="font-size:.72rem;color:${d.taxa===null?'var(--t4)':d.taxa<60?'var(--red)':d.taxa<80?'var(--amber)':'var(--green)'};font-weight:700">
+              ${d.taxa===null?'Sem dados':d.taxa+'%'}
+            </span>
+          </div>
+          <div style="height:6px;background:var(--bg5);border-radius:20px;overflow:hidden">
+            <div style="width:${d.taxa===null?0:d.taxa}%;height:100%;border-radius:20px;background:${d.taxa===null?'var(--bg4)':d.taxa<60?'var(--red)':d.taxa<80?'var(--amber)':'var(--green)'}; transition:width .5s"></div>
+          </div>
+          <div style="font-size:.6rem;color:var(--t4);margin-top:2px">${d.sessoes} sessão(ões) · ${Math.round(d.mins/60*10)/10}h estudadas</div>
+        </div>
+      `).join('')}`}
+    </div>
+
+    <!-- Recomendações -->
+    <div class="card" style="margin-bottom:16px">
+      <div class="card-title">💡 Recomendações Estratégicas</div>
+      ${!temDados?`<div style="padding:12px;font-size:.78rem;color:var(--t3)">
+        Registre pelo menos 3 sessões de estudo para receber recomendações personalizadas baseadas no seu desempenho real.
+      </div>`:`
+      ${fracas.length?`<div style="padding:10px 14px;background:var(--rs);border-radius:var(--r);margin-bottom:8px">
+        <span style="font-size:.78rem;color:var(--red);font-weight:700">🔴 Atenção: ${fracas.map(f=>f.mat).join(', ')} — taxa abaixo de 60%</span>
+      </div>`:''}
+      ${fortes.length?`<div style="padding:10px 14px;background:var(--gs);border-radius:var(--r);margin-bottom:8px">
+        <span style="font-size:.78rem;color:var(--green);font-weight:700">🟢 ${fortes.map(f=>f.mat).join(', ')} — ótimo desempenho!</span>
+      </div>`:''}
+      ${semDados.length?`<div style="padding:10px 14px;background:var(--bg3);border-radius:var(--r);margin-bottom:8px">
+        <span style="font-size:.78rem;color:var(--t2)">📚 Ainda não estudou: ${semDados.map(s=>s.mat).join(', ')}</span>
+      </div>`:''}
+      <div style="padding:10px 14px;background:var(--bg3);border-radius:var(--r);margin-bottom:8px">
+        <span style="font-size:.78rem;color:var(--t2)">🔁 Nunca estude a mesma matéria por mais de 2h seguidas</span>
+      </div>
+      <div style="padding:10px 14px;background:var(--bg3);border-radius:var(--r)">
+        <span style="font-size:.78rem;color:var(--t2)">📅 Use as Revisões SRS para não esquecer o que estudou</span>
+      </div>`}
+    </div>
+  `;
+}
+
+function abrirEditBloco(blocoId, data){
+  const blocos = ST.sched?.blocks?.[data]||[];
+  const b = blocos.find(x=>x.id===blocoId);
+  if(!b) return;
+  document.getElementById('ebBlocoRef').value = blocoId+'|'+data;
+  document.getElementById('ebMateria').value = b.materia;
+  document.getElementById('ebTopico').value = b.topico||'';
+  document.getElementById('ebHoras').value = b.horas||1;
+  ebBlocoData = data;
+  openModal('mEditBloco');
+}
+
+function salvarEdicaoBloco(){
+  const ref = document.getElementById('ebBlocoRef')?.value;
+  if(!ref) return;
+  const [blocoId, data] = ref.split('|');
+  const blocos = ST.sched?.blocks?.[data]||[];
+  const b = blocos.find(x=>x.id===blocoId);
+  if(!b) return;
+  b.materia = document.getElementById('ebMateria')?.value?.trim()||b.materia;
+  b.topico = document.getElementById('ebTopico')?.value?.trim()||'';
+  b.horas = parseFloat(document.getElementById('ebHoras')?.value||1);
+  save();
+  closeModal('mEditBloco');
+  renderCronoIASemana();
+  showToast('Bloco atualizado!');
+}
+
+function excluirBloco(){
+  const ref = document.getElementById('ebBlocoRef')?.value;
+  if(!ref) return;
+  const [blocoId, data] = ref.split('|');
+  if(!ST.sched?.blocks?.[data]) return;
+  ST.sched.blocks[data] = ST.sched.blocks[data].filter(b=>b.id!==blocoId);
+  save();
+  closeModal('mEditBloco');
+  renderCronoIASemana();
+  showToast('Bloco removido');
+}
+
+
+
+function renderCronoIASemana(){
+  const grid = document.getElementById('cronoIAGrid');
+  if(!grid) return;
+  const now = new Date();
+  const dow = now.getDay();
+  const diasNomes = ['Dom','Seg','Ter','Qua','Qui','Sex','Sab'];
+  let html = '';
+  let temBlocos = false;
+  for(let i=0;i<7;i++){
+    const d = new Date(now);
+    d.setDate(d.getDate()-dow+i);
+    const ds = d.toISOString().slice(0,10);
+    const blocos = ST.sched.blocks?.[ds]||[];
+    if(blocos.length) temBlocos = true;
+    const isHoje = ds===today();
+    html += `<div class="crono-dia ${isHoje?'crono-dia-hoje':''}">
+      <div class="crono-dia-header">
+        <div><div class="crono-dia-nome">${diasNomes[i]}</div><div class="crono-dia-num">${d.getDate()}</div></div>
+        ${isHoje?'<span style="font-size:.6rem;font-weight:800;padding:2px 8px;border-radius:20px;background:var(--pg);color:#fff">HOJE</span>':''}
+      </div>
+      <div style="padding:8px;min-height:70px">
+        ${blocos.map(b=>`<div class="crono-bloco-novo ${b.feito?'concluido':''}">
+          <div style="flex:1;min-width:0">
+            <div class="crono-bloco-mat">${getP(b.projetoId)?.emoji||''} ${b.materia}</div>
+            ${b.topico?`<div class="crono-bloco-top">Topico: ${b.topico}</div>`:''}
+            <div class="crono-bloco-top">${b.horas}h ${b.feito?'<span style="color:var(--green)">Feito</span>':''}</div>
+          </div>
+          ${!b.feito?`<button onclick="abrirRegistroCronograma('${b.id}','${ds}')"
+            style="padding:6px 10px;border-radius:8px;background:var(--pg);color:#fff;font-size:.68rem;font-weight:700;cursor:pointer;flex-shrink:0">Estudei</button>`
+          :`<button onclick="desmarcarBloco('${b.id}','${ds}')"
+            style="padding:5px 8px;border-radius:8px;background:var(--bg4);color:var(--t4);font-size:.68rem;cursor:pointer;flex-shrink:0">Desfazer</button>`}
+        </div>`).join('')}
+        ${!blocos.length?`<div style="text-align:center;padding:14px;color:var(--t4);font-size:.72rem">Livre</div>`:''}
+      </div>
+    </div>`;
+  }
+  if(!temBlocos){
+    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px;background:var(--bg2);border-radius:var(--rl);border:1px solid var(--bd)">
+      <div style="font-size:2rem;margin-bottom:12px">🤖</div>
+      <div style="font-size:.9rem;font-weight:700;color:var(--t1);margin-bottom:6px">Nenhum cronograma gerado</div>
+      <div style="font-size:.76rem;color:var(--t3);margin-bottom:16px">Clique em Gerar Semana para a IA criar seu cronograma com revezamento automático</div>
+      <button onclick="abrirGerarCronograma()" style="padding:10px 24px;border-radius:var(--r);background:var(--pg);color:#fff;font-size:.82rem;font-weight:700;cursor:pointer">🤖 Gerar Semana</button>
+    </div>`;
+  } else {
+    grid.innerHTML = html;
+  }
+}
+
 
 function cronoIAUpdateMats(){
   // Atualizar preview de matérias ao mudar projeto
@@ -3960,7 +4662,22 @@ function getEdital(id){
 function abrirSeletorEdital(){
   const medio = getEditaisPorNivel('Médio');
   const superior = getEditaisPorNivel('Superior');
-  document.getElementById('editalSeletorConteudo').innerHTML = `
+  // Garantir que o modal existe antes de tentar preencher
+  let el = document.getElementById('editalSeletorConteudo');
+  if(!el){
+    // Criar modal dinamicamente se não existir
+    const overlay = document.createElement('div');
+    overlay.className = 'overlay';
+    overlay.id = 'mEditalSeletor';
+    overlay.innerHTML = `<div class="modal" style="max-width:520px;max-height:85vh;display:flex;flex-direction:column">
+      <div class="modal-hd"><div class="modal-title">📋 Escolher Edital Pronto</div><button class="modal-close" onclick="closeModal('mEditalSeletor')">✕</button></div>
+      <div class="modal-body" style="overflow-y:auto;flex:1" id="editalSeletorConteudo"></div>
+      <div style="padding:16px;border-top:1px solid var(--bd)"><button class="btn-ghost" onclick="closeModal('mEditalSeletor')" style="width:100%;justify-content:center">Cancelar</button></div>
+    </div>`;
+    document.body.appendChild(overlay);
+    el = document.getElementById('editalSeletorConteudo');
+  }
+  el.innerHTML = `
     <div style="margin-bottom:16px">
       <div style="font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--t3);margin-bottom:10px">📋 Nível Médio</div>
       ${medio.map(e=>`
@@ -3994,19 +4711,265 @@ function abrirSeletorEdital(){
 function selecionarEdital(id){
   const e = getEdital(id);
   if(!e) return;
-  // Preencher o formulário de novo projeto com os dados do edital
-  document.getElementById('npNome').value = e.nome;
-  document.getElementById('npDesc').value = e.orgao + ' — ' + e.nivel;
-  // Selecionar cor e emoji correspondente
-  const corIdx = CORES.findIndex(c=>c===e.cor)||0;
-  const emojiMap = {'🚔':0,'🕵️':1,'🏛️':2,'🏦':3,'💳':4,'📬':5,'📊':6,'💰':7,'👮':8,'🔐':9,'⚖️':10,'🔍':11,'🔎':12};
-  // Definir matérias
-  npMaterias = [...e.materias];
   closeModal('mEditalSeletor');
-  // Renderizar matérias no formulário
-  renderNpMaterias();
-  // Feedback
-  showToast('Edital ' + e.nome + ' carregado! ' + e.materias.length + ' matérias ✓');
+  // Abrir modal de novo projeto
+  openNewProj();
+  // Preencher com dados do edital
+  setTimeout(()=>{
+    document.getElementById('npNome').value = e.nome;
+    document.getElementById('npDesc').value = e.orgao;
+    document.getElementById('npMats').value = e.materias.join('\n');
+    // Cor e emoji
+    selCor = e.cor || '#7c3aed';
+    selEmoji = e.emoji || '🎯';
+    // Atualizar visual dos seletores
+    const corEl = document.querySelector('.cor-selecionada');
+    if(corEl) corEl.style.background = selCor;
+    const emojiEl = document.querySelector('.emoji-selecionado');
+    if(emojiEl) emojiEl.textContent = selEmoji;
+    showToast(e.emoji + ' Edital ' + e.nome + ' carregado! ' + e.materias.length + ' matérias prontas ✓');
+  }, 100);
+}
+
+/* ════════════════════════════════════════
+   CRONOGRAMA UNIFICADO — IA + MANUAL
+════════════════════════════════════════ */
+let gcMatsQtd = 1;
+function setGcMats(n, btn){
+  gcMatsQtd = n;
+  document.querySelectorAll('[id^="gcMat"]').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+}
+
+function abrirGerarCronograma(){
+  const sel = document.getElementById('gcProjeto');
+  if(sel) sel.innerHTML = '<option value="">Selecione o projeto</option>' +
+    ST.projects.map(p=>`<option value="${p.id}">${p.emoji} ${p.nome}</option>`).join('');
+  openModal('mGerarCrono');
+}
+
+function gerarCronogramaSemanal(){
+  const projId = document.getElementById('gcProjeto')?.value;
+  const diasSem = parseInt(document.getElementById('gcDias')?.value||5);
+  const horasDia = parseInt(document.getElementById('gcHoras')?.value||2);
+
+  if(!projId){ showToast('Selecione um projeto','err'); return; }
+  const proj = getP(projId);
+  if(!proj || !proj.materias.length){ showToast('Projeto sem matérias cadastradas','err'); return; }
+
+  // Calcular pesos das matérias (mesma lógica do assistente)
+  const mats = proj.materias;
+  const pesos = mats.map(mat => {
+    const ss = ST.sessions.filter(s=>s.projetoId===projId&&s.materia===mat);
+    const taxa = ss.reduce((a,s)=>a+(s.qtd||0),0)>0
+      ? ss.reduce((a,s)=>a+(s.acertos||0),0)/ss.reduce((a,s)=>a+(s.qtd||0),0)*100 : 50;
+    const dias = calcularDiasDesdeUltimo(mat, projId);
+    const peso = (100-Math.min(taxa,90))*0.5 + Math.min(dias,14)*2;
+    return {mat, peso, taxa:Math.round(taxa), dias};
+  }).sort((a,b)=>b.peso-a.peso);
+
+  // Definir quais dias da semana usar
+  const diasMap = {3:[1,3,5], 4:[1,2,4,5], 5:[1,2,3,4,5], 6:[1,2,3,4,5,6], 7:[0,1,2,3,4,5,6]};
+  const diasAtivos = diasMap[diasSem] || [1,2,3,4,5];
+  const diasNomes = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+
+  // Montar semana atual
+  const now = new Date();
+  const dow = now.getDay();
+  const semana = {};
+
+  // Limpar semana atual do projeto
+  const blocosSemana = {};
+
+  diasAtivos.forEach((dia, idx) => {
+    // Data do dia desta semana
+    const d = new Date(now);
+    d.setDate(d.getDate() - dow + dia);
+    const ds = d.toISOString().slice(0,10);
+
+    // Distribuir matérias
+    const matsNoDia = [];
+    for(let m=0; m<gcMatsQtd; m++){
+      const mat = pesos[(idx*gcMatsQtd + m) % pesos.length];
+      matsNoDia.push({
+        id: crypto.randomUUID ? crypto.randomUUID() : Date.now().toString()+Math.random(),
+        projetoId: projId,
+        materia: mat.mat,
+        topico: '',
+        horas: Math.round(horasDia/gcMatsQtd*10)/10,
+        feito: false,
+        data: ds
+      });
+    }
+    blocosSemana[ds] = matsNoDia;
+  });
+
+  // Salvar no ST.sched
+  if(!ST.sched) ST.sched = {blocks:{}};
+  // Mesclar com blocos existentes (não sobrescrever dias já feitos)
+  Object.entries(blocosSemana).forEach(([data, blocos]) => {
+    const existentes = ST.sched.blocks[data] || [];
+    const jaFeitos = existentes.filter(b=>b.feito);
+    ST.sched.blocks[data] = [...jaFeitos, ...blocos];
+  });
+
+  save();
+  closeModal('mGerarCrono');
+  goTo('cronograma');
+  showToast('Cronograma gerado para a semana! 📅');
+}
+
+function renderCronograma(){
+  const el = document.getElementById('view-cronograma');
+  if(!el) return;
+
+  // Verificar se precisa de alerta de semana nova (sábado ou domingo)
+  const dow = new Date().getDay();
+  const alertEl = document.getElementById('alertaSemanaNova');
+  if(alertEl) alertEl.style.display = (dow === 0 || dow === 6) ? 'block' : 'none';
+
+  const now = new Date();
+  const weekDays = [];
+  for(let i=0; i<7; i++){
+    const d = new Date(now);
+    d.setDate(d.getDate() - dow + i);
+    weekDays.push({
+      date: d.toISOString().slice(0,10),
+      label: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'][i],
+      num: d.getDate(),
+      isToday: d.toISOString().slice(0,10) === today()
+    });
+  }
+
+  const container = el.querySelector('#cronogramaGrid') || (() => {
+    const div = document.createElement('div');
+    div.id = 'cronogramaGrid';
+    div.style.cssText = 'display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px';
+    el.appendChild(div);
+    return div;
+  })();
+
+  container.innerHTML = weekDays.map(day => {
+    const blocos = ST.sched.blocks?.[day.date] || [];
+    return `<div class="crono-dia ${day.isToday?'crono-dia-hoje':''}">
+      <div class="crono-dia-header">
+        <div>
+          <div class="crono-dia-nome">${day.label}</div>
+          <div class="crono-dia-num">${day.num}</div>
+        </div>
+        ${day.isToday ? '<span style="font-size:.62rem;font-weight:800;padding:2px 8px;border-radius:20px;background:var(--pg);color:#fff">HOJE</span>' : ''}
+      </div>
+      <div style="padding:8px;min-height:80px">
+        ${blocos.length ? blocos.map(b => `
+          <div class="crono-bloco-novo ${b.feito?'concluido':''}">
+            <div style="flex:1;min-width:0">
+              <div class="crono-bloco-mat">${getP(b.projetoId)?.emoji||'📚'} ${b.materia}</div>
+              ${b.topico ? `<div class="crono-bloco-top">📌 ${b.topico}</div>` : ''}
+              <div class="crono-bloco-top">${b.horas}h ${b.feito?'<span style="color:var(--green)">✓ Concluído</span>':'planejado'}</div>
+            </div>
+            ${!b.feito ? `<button onclick="abrirRegistroCronograma('${b.id}','${day.date}')"
+              style="padding:6px 12px;border-radius:8px;background:var(--pg);color:#fff;font-size:.7rem;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0">
+              ✓ Estudei
+            </button>` : `<button onclick="desmarcarBloco('${b.id}','${day.date}')"
+              style="padding:6px 10px;border-radius:8px;background:var(--bg4);color:var(--t4);font-size:.7rem;cursor:pointer;flex-shrink:0">
+              ↩
+            </button>`}
+          </div>
+        `).join('') : `<div style="text-align:center;padding:20px 10px;color:var(--t4);font-size:.75rem">Nenhum estudo planejado</div>`}
+        <div class="crono-add-btn" onclick="abrirAdicionarBloco('${day.date}')">
+          + Adicionar manualmente
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function abrirRegistroCronograma(blocoId, data){
+  // Encontrar o bloco
+  const blocos = ST.sched.blocks?.[data] || [];
+  const bloco = blocos.find(b=>b.id===blocoId);
+  if(!bloco) return;
+
+  // Pré-preencher o modal de registro
+  document.getElementById('rcBlocoId').value = blocoId + '|' + data;
+  document.getElementById('mRegCronoTitle').textContent = '✅ ' + bloco.materia + ' — ' + data;
+  document.getElementById('rcMateria').value = bloco.materia;
+  document.getElementById('rcTopico').value = bloco.topico || '';
+  document.getElementById('rcMin').value = Math.round(bloco.horas * 60) || 60;
+  document.getElementById('rcQtd').value = '';
+  document.getElementById('rcAcertos').value = '';
+  document.getElementById('rcObs').value = '';
+  document.getElementById('rcTipo').value = 'Teoria';
+
+  openModal('mRegCrono');
+}
+
+function salvarRegistroCronograma(){
+  const ref = document.getElementById('rcBlocoId')?.value;
+  if(!ref) return;
+  const [blocoId, data] = ref.split('|');
+
+  const materia = document.getElementById('rcMateria')?.value?.trim();
+  const topico = document.getElementById('rcTopico')?.value?.trim() || '';
+  const tipo = document.getElementById('rcTipo')?.value || 'Teoria';
+  const min = parseInt(document.getElementById('rcMin')?.value) || 0;
+  const qtd = parseInt(document.getElementById('rcQtd')?.value) || 0;
+  const acertos = parseInt(document.getElementById('rcAcertos')?.value) || 0;
+  const obs = document.getElementById('rcObs')?.value?.trim() || '';
+
+  if(!materia){ showToast('Informe a matéria estudada','err'); return; }
+  if(!min || min < 1){ showToast('Informe o tempo estudado','err'); return; }
+
+  // Encontrar o bloco para pegar o projetoId
+  const blocos = ST.sched.blocks?.[data] || [];
+  const bloco = blocos.find(b=>b.id===blocoId);
+  const projetoId = bloco?.projetoId || (ST.projects[0]?.id||'');
+
+  // Salvar sessão no histórico
+  const sessao = {
+    id: crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(),
+    projetoId,
+    materia,
+    topico,
+    tipo,
+    min,
+    qtd,
+    acertos,
+    obs,
+    data,
+    ts: new Date().toISOString(),
+    origem: 'cronograma'
+  };
+  ST.sessions.push(sessao);
+
+  // Marcar bloco como concluído
+  if(bloco){
+    bloco.feito = true;
+    bloco.topico = topico;
+  }
+
+  // XP
+  addXP(Math.floor(min/10)*5 + qtd*2 + 20, 'Cronograma: ' + materia);
+
+  save();
+  closeModal('mRegCrono');
+  renderCronograma();
+  showToast('✅ ' + materia + ' registrado no histórico! +XP');
+}
+
+function desmarcarBloco(blocoId, data){
+  const blocos = ST.sched.blocks?.[data] || [];
+  const bloco = blocos.find(b=>b.id===blocoId);
+  if(bloco){ bloco.feito = false; save(); renderCronograma(); }
+}
+
+function abrirAdicionarBloco(data){
+  // Abrir modal de registro normal pré-preenchido com a data
+  openReg();
+  setTimeout(()=>{
+    // Preencher data se possível
+    showToast('Adicione sua sessão manualmente para o dia ' + fmtDateShort(data));
+  }, 200);
 }
 
 /* ════════════════════════════════════════
