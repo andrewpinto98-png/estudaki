@@ -437,19 +437,6 @@ img, svg { max-width: 100%; }
 [style*="width:520px"] { width: 100% !important; max-width: 100% !important; }
 [style*="width:220px"] { max-width: calc(50% - 8px) !important; }
 
-/* ── GARANTIR VISIBILIDADE ── */
-.card { background: var(--bg2) !important; border: 1px solid var(--bd) !important; }
-.card-title { color: var(--t3) !important; font-size: .78rem !important; font-weight: 800 !important; text-transform: uppercase !important; letter-spacing: .6px !important; margin-bottom: 12px !important; display: block !important; }
-.rank-name { color: var(--t1) !important; }
-.rank-meta { color: var(--t3) !important; }
-.empty { text-align: center; padding: 30px 20px; }
-.empty-ico { font-size: 2rem; margin-bottom: 8px; }
-.empty-t { font-size: .85rem; color: var(--t3); }
-.kpi-val { color: var(--t1) !important; }
-.kpi-lbl { color: var(--t3) !important; }
-.sec-title { color: var(--t1) !important; }
-.sec-sub { color: var(--t3) !important; }
-.view { min-height: 200px; }
 
 /* ════════════════════════════════════════
    RESPONSIVO UNIVERSAL
@@ -1871,11 +1858,21 @@ async function salvarNoFirestore(){
 // ── SYNC EM TEMPO REAL ──
 function iniciarSyncTempoReal(){
   if(!currentUser) return;
+  let _lastLocalSave = 0;
+  // Guardar referência ao timestamp do último save local
+  window._localSaveTs = window._localSaveTs || 0;
+  
   db.collection('usuarios').doc(currentUser.uid).onSnapshot(doc => {
     if(!doc.exists || isSyncing) return;
     const data = doc.data();
     if(!data || !data.updatedAt) return;
-    // Atualizar dados em tempo real
+    
+    // Ignorar snapshot se veio do próprio dispositivo (evita loop)
+    const remoteTs = data.updatedAt || 0;
+    const localTs = window._localSaveTs || 0;
+    if(remoteTs <= localTs + 2000) return; // 2s de margem
+    
+    // Só atualizar se dados realmente mudaram de outro dispositivo
     ST.sessions = data.sessions || ST.sessions;
     ST.projects = data.projects || ST.projects;
     ST.lembretes = data.lembretes || ST.lembretes;
@@ -1884,7 +1881,8 @@ function iniciarSyncTempoReal(){
     ST.sched = data.sched || ST.sched;
     ST.profile = data.profile || ST.profile;
     ST.gami = data.gami || ST.gami;
-    // Re-renderizar view ativa
+    
+    // Re-renderizar apenas a view ativa
     const ativa = document.querySelector('.view.active');
     if(ativa){
       const id = ativa.id.replace('view-','');
@@ -1924,6 +1922,7 @@ if(!ST.gami)ST.gami={xp:0,level:1,xpHistory:[],badges:[],streakFreezes:1};
 if(!ST.topicos)ST.topicos={};
 if(!ST.srs)ST.srs={};// {materia: {nivel, revisoes, ultimaRevisao}}
 function save(){
+  window._localSaveTs = Date.now(); // Marcar para onSnapshot ignorar
   localStorage.setItem(KEY,JSON.stringify(ST));
   if(currentUser){
     if(syncTimeout) clearTimeout(syncTimeout);
@@ -1998,34 +1997,30 @@ function goTo(view){
   document.getElementById('view-'+view)?.classList.add('active');
   document.getElementById('ni-'+view)?.classList.add('active');
   document.getElementById('topbarPage').textContent=viewTitles[view]||view;
-  // Mostrar skeleton enquanto carrega
-  showSkeleton('view-'+view);
-  // Renderizar com pequeno delay para skeleton aparecer
-  requestAnimationFrame(()=>{
-    if(view==='dashboard')renderDashboard();
-    else if(view==='projetos')renderProjetos();
-    else if(view==='historico'){populateHistFiltros();renderHistorico()}
-    else if(view==='ranking')renderRanking();
-    else if(view==='inteligencia')renderInteligencia();
-    else if(view==='revisoes')renderRevisoes();
-    else if(view==='cronograma-ia')renderCronoIA();
-    else if(view==='assistente')renderAssistente();
-    else if(view==='cronograma')renderCronograma();
-    else if(view==='lembretes'){renderLembretes()}
-    else if(view==='anotacoes'){populateNotaFiltros();renderAnotacoes()}
-    else if(view==='gami'){renderGami();renderAvatares();}
-    else if(view==='mapa')renderMapa();
-    else if(view==='config')renderConfig();
-  });
-  // Fechar sidebar mobile SEMPRE ao navegar
+  // Renderizar diretamente — sem skeleton que destrói IDs
+  if(view==='dashboard')renderDashboard();
+  else if(view==='projetos')renderProjetos();
+  else if(view==='historico'){populateHistFiltros();renderHistorico()}
+  else if(view==='ranking')renderRanking();
+  else if(view==='inteligencia')renderInteligencia();
+  else if(view==='revisoes')renderRevisoes();
+  else if(view==='cronograma-ia')renderCronoIA();
+  else if(view==='assistente')renderAssistente();
+  else if(view==='cronograma')renderCronograma();
+  else if(view==='lembretes'){renderLembretes()}
+  else if(view==='anotacoes'){populateNotaFiltros();renderAnotacoes()}
+  else if(view==='gami'){renderGami();renderAvatares();}
+  else if(view==='mapa')renderMapa();
+  else if(view==='config')renderConfig();
+  // Fechar sidebar mobile
   const sb = document.getElementById('sidebar');
   const mo = document.getElementById('mobileOverlay');
-  if(sb){ sb.classList.remove('mobile-open'); }
-  if(mo){ mo.style.display='none'; }
+  if(sb) sb.classList.remove('mobile-open');
+  if(mo) mo.style.display='none';
   // Scroll para o topo
-  const contentEl = document.querySelector('.content');
-  if(contentEl) contentEl.scrollTop = 0;
-  // Atualizar bottom nav
+  const c = document.querySelector('.content');
+  if(c) c.scrollTop = 0;
+  // Bottom nav
   updateBottomNav(view);
   updateBottomNavBadges();
 }
@@ -5681,7 +5676,6 @@ function iniciarSistemaAlarme(){
 // Boot controlado pelo Firebase Auth (auth.onAuthStateChanged)
 mostrarLogin(); // Mostrar login enquanto verifica auth
 iniciarSistemaAlarme();
-showSkeleton('view-dashboard');
 // Inicializar drag-and-drop e bottom nav
 initDragDrop();
 updateBottomNavBadges();
