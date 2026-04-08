@@ -365,7 +365,7 @@ textarea.form-input{resize:vertical;line-height:1.6}
 
 /* RESPONSIVE */
 .mobile-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:49;cursor:pointer}
-.hamburger{display:none;width:36px;height:36px;border-radius:var(--r);background:var(--bg3);border:1px solid var(--bd2);align-items:center;justify-content:center;flex-direction:column;gap:4px;cursor:pointer;flex-shrink:0}
+.hamburger{display:flex;width:36px;height:36px;border-radius:var(--r);background:var(--bg3);border:1px solid var(--bd2);align-items:center;justify-content:center;flex-direction:column;gap:4px;cursor:pointer;flex-shrink:0}
 .hamburger span{width:16px;height:2px;background:var(--t2);border-radius:1px}
 @keyframes mascoteFloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-5px) rotate(2deg)}}
 /* ── AVATARES ── */
@@ -853,7 +853,7 @@ html { overflow-x: hidden; }
 /* Mostrar bottom nav no mobile */
 @media(max-width:768px){
   .bottom-nav { display: flex !important; }
-  .hamburger { display: none !important; }
+  .hamburger{display:flex!important}
   /* Dar espaço para o bottom nav */
   .content { padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px) + 12px) !important; }
   /* Sidebar ainda funciona para itens extras */
@@ -896,6 +896,19 @@ html { overflow-x: hidden; }
   border-color: rgba(251,191,36,.3) !important;
   background: rgba(251,191,36,.05) !important;
 }
+
+
+/* ── GAMIFICAÇÃO SAFE ── */
+#gamiLevelCard:empty::after { content: 'Carregando...'; color: var(--t4); font-size:.8rem; padding:20px; display:block; }
+#gamiStreakCard:empty { min-height: 80px; background: var(--bg2); border: 1px solid var(--bd); border-radius: var(--rl); }
+.level-card-top { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+.level-avatar { font-size: 2.5rem; flex-shrink: 0; }
+.level-info { flex: 1; min-width: 0; }
+.level-xp-track { height: 8px; background: var(--bg4); border-radius: 20px; overflow: hidden; margin: 12px 0 6px; }
+.level-xp-fill { height: 100%; background: var(--pg); border-radius: 20px; transition: width .6s ease; }
+.level-xp-text { display: flex; justify-content: space-between; font-size: .62rem; color: var(--t3); }
+.streak-fire { font-size: 2rem; display: block; margin-bottom: 4px; }
+.streak-count { font-family: 'Syne', sans-serif; font-size: 2.5rem; font-weight: 800; color: var(--amber); }
 
 </style>
 </head>
@@ -1581,13 +1594,13 @@ html { overflow-x: hidden; }
       <div class="view" id="view-gami">
         <div class="sec-hd"><div><div class="sec-title">⭐ Gamificação</div><div class="sec-sub">Seu progresso, conquistas e nível de estudante</div></div></div>
         <div id="gamiLevelCard"></div>
-        <div class="grid g3" style="margin-bottom:20px">
+        <div class="grid g2" style="margin-bottom:16px">
           <div id="gamiStreakCard"></div>
-          <div class="card" style="grid-column:span 2"><div class="card-title">📈 Histórico de XP</div><div id="gamiXPHist"></div></div>
+          <div class="card"><div class="card-title">📈 Histórico de XP</div><div id="gamiXPHist"></div></div>
         </div>
-        <div class="card" style="margin-bottom:20px">
+        <div class="card" style="margin-bottom:16px">
           <div class="card-title">🎭 Avatares — Desbloqueie com XP</div>
-          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-top:10px" id="gamiAvatares"></div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:10px;margin-top:10px" id="gamiAvatares"></div>
         </div>
         <div class="card"><div class="card-title">🏅 Conquistas</div><div class="badges-grid" id="gamiBadges"></div></div>
       </div>
