@@ -670,6 +670,213 @@ html { overflow-x: hidden; }
 /* ── PRINT ── */
 @media print { button { display: none !important; } }
 
+
+/* ════════════════════════════════════════
+   LOADING SKELETONS
+   Evita tela preta — feedback visual imediato
+════════════════════════════════════════ */
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, var(--bg3) 25%, var(--bg4) 50%, var(--bg3) 75%);
+  background-size: 800px 100%;
+  animation: shimmer 1.4s infinite linear;
+  border-radius: var(--r);
+}
+.sk-line  { height: 14px; margin-bottom: 10px; border-radius: 20px; }
+.sk-line.sm { height: 10px; width: 60%; }
+.sk-line.lg { height: 20px; }
+.sk-card  { background: var(--bg2); border: 1px solid var(--bd); border-radius: var(--rl); padding: 18px; margin-bottom: 14px; }
+.sk-circle{ border-radius: 50%; flex-shrink: 0; }
+.sk-kpi   { background: var(--bg2); border: 1px solid var(--bd); border-radius: var(--rl); padding: 16px; }
+
+/* Dashboard skeleton */
+.sk-dashboard { display: flex; flex-direction: column; gap: 16px; }
+.sk-kpis { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
+
+
+/* ════════════════════════════════════════
+   REVISÃO VISUAL v7.7
+════════════════════════════════════════ */
+
+/* Transições suaves entre views */
+.view {
+  animation: fadeIn .2s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Assistente IA — tipografia consistente */
+.assist-card,
+.assist-card * {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  line-height: 1.5 !important;
+}
+.assist-card-title {
+  font-size: .72rem !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  letter-spacing: .6px !important;
+  color: var(--t3) !important;
+  margin-bottom: 10px !important;
+}
+
+/* Toast melhorado */
+#toast {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-size: .82rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0 !important;
+  border-radius: var(--rx) !important;
+  padding: 12px 20px !important;
+}
+
+/* Botões — consistência */
+.btn-prim, .btn-ghost, .btn-danger {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: 0 !important;
+  transition: var(--tr) !important;
+}
+
+/* Nav items — hover melhorado */
+.nav-item {
+  transition: var(--tr) !important;
+}
+.nav-item:hover {
+  background: var(--bg3) !important;
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--bg4); border-radius: 20px; }
+::-webkit-scrollbar-thumb:hover { background: var(--bd2); }
+
+/* Form inputs — melhor UX */
+.form-input:focus, .form-select:focus {
+  outline: none !important;
+  border-color: var(--p) !important;
+  box-shadow: 0 0 0 3px var(--ps) !important;
+}
+
+/* Modal — entrada suave */
+.modal {
+  animation: modalIn .25s cubic-bezier(.34,1.56,.64,1) !important;
+}
+
+/* Cards hover */
+.card:hover { border-color: var(--bd2) !important; }
+
+/* Section headers */
+.sec-hd {
+  margin-bottom: 20px !important;
+}
+
+
+/* ════════════════════════════════════════
+   BOTTOM NAV — Navegação inferior mobile
+   Igual Instagram/TikTok
+════════════════════════════════════════ */
+.bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 60px;
+  background: var(--bg1);
+  border-top: 1px solid var(--bd);
+  z-index: 40;
+  padding: 0 4px;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.bottom-nav-items {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 100%;
+}
+.bn-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 6px 8px;
+  border-radius: var(--rl);
+  cursor: pointer;
+  transition: var(--tr);
+  min-width: 44px;
+  position: relative;
+  flex: 1;
+}
+.bn-item:active { transform: scale(.9); }
+.bn-item.active .bn-icon { color: var(--p); }
+.bn-item.active .bn-label { color: var(--p); font-weight: 800; }
+.bn-icon {
+  font-size: 1.2rem;
+  color: var(--t3);
+  transition: var(--tr);
+  line-height: 1;
+}
+.bn-label {
+  font-size: .52rem;
+  color: var(--t3);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .4px;
+  white-space: nowrap;
+  transition: var(--tr);
+}
+.bn-badge {
+  position: absolute;
+  top: 4px; right: 8px;
+  min-width: 16px; height: 16px;
+  background: var(--red);
+  color: #fff;
+  font-size: .5rem;
+  font-weight: 800;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  border: 2px solid var(--bg1);
+}
+.bn-plus {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--pg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  color: #fff;
+  box-shadow: var(--shp);
+  transition: var(--tr);
+  flex-shrink: 0;
+}
+.bn-plus:active { transform: scale(.9) rotate(45deg); }
+
+/* Mostrar bottom nav no mobile */
+@media(max-width:768px){
+  .bottom-nav { display: flex !important; }
+  .hamburger { display: none !important; }
+  /* Dar espaço para o bottom nav */
+  .content { padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px) + 12px) !important; }
+  /* Sidebar ainda funciona para itens extras */
+  .sidebar { display: flex; }
+}
+
+/* Drag and Drop styles */
+.crono-bloco-novo[draggable="true"] { cursor: grab; }
+.crono-bloco-novo[draggable="true"]:active { cursor: grabbing; opacity: .7; }
+.crono-dia.drag-over { border: 2px dashed var(--p) !important; background: var(--ps) !important; }
+.drag-handle { font-size: .8rem; color: var(--t4); cursor: grab; margin-right: 4px; }
+
 </style>
 </head>
 <body>
@@ -1752,20 +1959,25 @@ function goTo(view){
   document.getElementById('view-'+view)?.classList.add('active');
   document.getElementById('ni-'+view)?.classList.add('active');
   document.getElementById('topbarPage').textContent=viewTitles[view]||view;
-  if(view==='dashboard')renderDashboard();
-  else if(view==='projetos')renderProjetos();
-  else if(view==='historico'){populateHistFiltros();renderHistorico()}
-  else if(view==='ranking')renderRanking();
-  else if(view==='inteligencia')renderInteligencia();
-  else if(view==='revisoes')renderRevisoes();
-  else if(view==='cronograma-ia')renderCronoIA();
-  else if(view==='assistente')renderAssistente();
-  else if(view==='cronograma')renderCronograma();
-  else if(view==='lembretes'){renderLembretes()}
-  else if(view==='anotacoes'){populateNotaFiltros();renderAnotacoes()}
-  else if(view==='gami'){renderGami();renderAvatares();}
-  else if(view==='mapa')renderMapa();
-  else if(view==='config')renderConfig();
+  // Mostrar skeleton enquanto carrega
+  showSkeleton('view-'+view);
+  // Renderizar com pequeno delay para skeleton aparecer
+  requestAnimationFrame(()=>{
+    if(view==='dashboard')renderDashboard();
+    else if(view==='projetos')renderProjetos();
+    else if(view==='historico'){populateHistFiltros();renderHistorico()}
+    else if(view==='ranking')renderRanking();
+    else if(view==='inteligencia')renderInteligencia();
+    else if(view==='revisoes')renderRevisoes();
+    else if(view==='cronograma-ia')renderCronoIA();
+    else if(view==='assistente')renderAssistente();
+    else if(view==='cronograma')renderCronograma();
+    else if(view==='lembretes'){renderLembretes()}
+    else if(view==='anotacoes'){populateNotaFiltros();renderAnotacoes()}
+    else if(view==='gami'){renderGami();renderAvatares();}
+    else if(view==='mapa')renderMapa();
+    else if(view==='config')renderConfig();
+  });
   // Fechar sidebar mobile SEMPRE ao navegar
   const sb = document.getElementById('sidebar');
   const mo = document.getElementById('mobileOverlay');
@@ -1774,6 +1986,9 @@ function goTo(view){
   // Scroll para o topo
   const contentEl = document.querySelector('.content');
   if(contentEl) contentEl.scrollTop = 0;
+  // Atualizar bottom nav
+  updateBottomNav(view);
+  updateBottomNavBadges();
 }
 function toggleSidebar(){
   const sb=document.getElementById('sidebar');
@@ -3009,6 +3224,34 @@ function executarImpressao(){
     </div>
   </div>
 </div>
+
+<!-- BOTTOM NAV MOBILE -->
+<nav class="bottom-nav" id="bottomNav">
+  <div class="bottom-nav-items">
+    <div class="bn-item active" id="bn-dashboard" onclick="goTo('dashboard');updateBottomNav('dashboard')">
+      <span class="bn-icon">🏠</span>
+      <span class="bn-label">Início</span>
+    </div>
+    <div class="bn-item" id="bn-projetos" onclick="goTo('projetos');updateBottomNav('projetos')">
+      <span class="bn-icon">📚</span>
+      <span class="bn-label">Projetos</span>
+      <span class="bn-badge" id="bbn-projetos" style="display:none">0</span>
+    </div>
+    <div class="bn-plus" onclick="openReg()" title="Registrar Estudo">
+      <span>+</span>
+    </div>
+    <div class="bn-item" id="bn-cronograma" onclick="goTo('cronograma-ia');updateBottomNav('cronograma')">
+      <span class="bn-icon">📅</span>
+      <span class="bn-label">Cronograma</span>
+    </div>
+    <div class="bn-item" id="bn-mais" onclick="toggleSidebar()">
+      <span class="bn-icon">☰</span>
+      <span class="bn-label">Mais</span>
+      <span class="bn-badge" id="bbn-revisoes" style="display:none">0</span>
+    </div>
+  </div>
+</nav>
+
 </body></html>`);
   win.document.close();
 }
@@ -4163,7 +4406,7 @@ function renderCronoIASemana(){
     const blocos = ST.sched.blocks?.[ds]||[];
     if(blocos.length) temBlocos = true;
     const isHoje = ds===today();
-    html += `<div class="crono-dia ${isHoje?'crono-dia-hoje':''}">
+    html += `<div class="crono-dia ${isHoje?'crono-dia-hoje':''}" data-dia="${ds}">
       <div class="crono-dia-header">
         <div><div class="crono-dia-nome">${diasNomes[i]}</div><div class="crono-dia-num">${d.getDate()}</div></div>
         ${isHoje?'<span style="font-size:.6rem;font-weight:800;padding:2px 8px;border-radius:20px;background:var(--pg);color:#fff">HOJE</span>':''}
@@ -5111,6 +5354,222 @@ function abrirAdicionarBloco(data){
   }, 200);
 }
 
+
+/* ════════════════════════════════════════
+   LOADING SKELETONS
+════════════════════════════════════════ */
+function showSkeleton(viewId){
+  const el = document.getElementById(viewId);
+  if(!el) return;
+  
+  const skeletons = {
+    'view-dashboard': `
+      <div class="sk-dashboard">
+        <div class="sk-card"><div class="skeleton sk-line lg" style="width:60%"></div><div class="skeleton sk-line sm"></div></div>
+        <div class="sk-kpis">
+          ${[1,2,3,4].map(()=>`<div class="sk-kpi"><div class="skeleton sk-circle" style="width:36px;height:36px;margin-bottom:10px"></div><div class="skeleton sk-line lg" style="width:50%"></div><div class="skeleton sk-line sm"></div></div>`).join('')}
+        </div>
+        <div class="sk-card"><div class="skeleton sk-line" style="width:40%;margin-bottom:16px"></div>${[1,2,3].map(()=>`<div style="display:flex;gap:10px;margin-bottom:12px"><div class="skeleton sk-circle" style="width:32px;height:32px"></div><div style="flex:1"><div class="skeleton sk-line" style="width:70%"></div><div class="skeleton sk-line sm"></div></div></div>`).join('')}</div>
+      </div>`,
+    'view-projetos': `
+      <div><div class="skeleton sk-line lg" style="width:50%;margin-bottom:20px"></div>
+      ${[1,2].map(()=>`<div class="sk-card"><div style="display:flex;gap:12px"><div class="skeleton sk-circle" style="width:40px;height:40px"></div><div style="flex:1"><div class="skeleton sk-line" style="width:60%"></div><div class="skeleton sk-line sm"></div></div></div></div>`).join('')}</div>`,
+    'view-historico': `
+      <div>${[1,2,3,4,5].map(()=>`<div class="sk-card"><div style="display:flex;gap:10px"><div class="skeleton sk-circle" style="width:36px;height:36px"></div><div style="flex:1"><div class="skeleton sk-line" style="width:55%"></div><div class="skeleton sk-line sm"></div></div><div class="skeleton sk-line" style="width:60px"></div></div></div>`).join('')}</div>`,
+    'view-ranking': `
+      <div><div class="skeleton sk-line lg" style="width:40%;margin-bottom:16px"></div>
+      ${[1,2,3].map(()=>`<div style="display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--bd)"><div class="skeleton" style="width:28px;height:28px;border-radius:8px"></div><div style="flex:1"><div class="skeleton sk-line" style="width:50%"></div><div class="skeleton sk-line sm"></div></div><div class="skeleton" style="width:80px;height:6px;border-radius:20px;margin-top:10px"></div></div>`).join('')}</div>`,
+    'view-revisoes': `
+      <div>${[1,2].map(()=>`<div class="sk-card"><div style="display:flex;gap:10px;align-items:center"><div class="skeleton sk-circle" style="width:36px;height:36px"></div><div style="flex:1"><div class="skeleton sk-line" style="width:60%"></div><div class="skeleton sk-line sm"></div></div><div class="skeleton" style="width:70px;height:32px;border-radius:8px"></div></div></div>`).join('')}</div>`,
+    'view-cronograma-ia': `
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px">
+      ${[1,2,3,4,5,6,7].map(()=>`<div class="sk-kpi"><div class="skeleton sk-line sm" style="margin-bottom:8px"></div><div class="skeleton sk-line lg" style="width:40%;margin-bottom:8px"></div>${[1,2].map(()=>`<div class="skeleton" style="height:50px;border-radius:8px;margin-bottom:6px"></div>`).join('')}</div>`).join('')}</div>`,
+  };
+  
+  const sk = skeletons[viewId];
+  if(sk) el.innerHTML = sk;
+}
+
+
+/* ════════════════════════════════════════
+   BOTTOM NAV — Controle
+════════════════════════════════════════ */
+function updateBottomNav(view){
+  // Mapear views para IDs do bottom nav
+  const map = {
+    'dashboard': 'bn-dashboard',
+    'projetos': 'bn-projetos', 
+    'cronograma': 'bn-cronograma',
+    'cronograma-ia': 'bn-cronograma',
+  };
+  document.querySelectorAll('.bn-item').forEach(b => b.classList.remove('active'));
+  const id = map[view];
+  if(id) document.getElementById(id)?.classList.add('active');
+}
+
+function updateBottomNavBadges(){
+  // Badge revisões
+  const revBadge = document.getElementById('bbn-revisoes');
+  const projBadge = document.getElementById('bbn-projetos');
+  if(revBadge){
+    const n = getDadosSRS ? getDadosSRS().filter(m=>m.status!=='ok').length : 0;
+    revBadge.style.display = n > 0 ? 'flex' : 'none';
+    revBadge.textContent = n;
+  }
+  if(projBadge){
+    const n = ST.projects?.length || 0;
+    projBadge.style.display = n > 0 ? 'flex' : 'none';
+    projBadge.textContent = n;
+  }
+}
+
+/* ════════════════════════════════════════
+   DRAG AND DROP — Cronograma Semanal
+════════════════════════════════════════ */
+let dragBloco = null;
+let dragBlocoData = null;
+
+function initDragDrop(){
+  // Delegação de eventos para drag and drop no cronograma
+  document.addEventListener('dragstart', (e) => {
+    const bloco = e.target.closest('[data-bloco-id]');
+    if(!bloco) return;
+    dragBloco = bloco.dataset.blocoId;
+    dragBlocoData = bloco.dataset.blocoData;
+    e.dataTransfer.effectAllowed = 'move';
+    bloco.style.opacity = '.5';
+  });
+
+  document.addEventListener('dragend', (e) => {
+    const bloco = e.target.closest('[data-bloco-id]');
+    if(bloco) bloco.style.opacity = '1';
+    document.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+  });
+
+  document.addEventListener('dragover', (e) => {
+    const dia = e.target.closest('[data-dia]');
+    if(!dia || !dragBloco) return;
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    document.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+    dia.classList.add('drag-over');
+  });
+
+  document.addEventListener('drop', (e) => {
+    const dia = e.target.closest('[data-dia]');
+    if(!dia || !dragBloco) return;
+    e.preventDefault();
+    
+    const targetData = dia.dataset.dia;
+    if(targetData === dragBlocoData) return;
+
+    // Mover bloco
+    const blocos = ST.sched?.blocks?.[dragBlocoData] || [];
+    const bloco = blocos.find(b => b.id === dragBloco);
+    if(!bloco) return;
+
+    // Remover do dia origem
+    ST.sched.blocks[dragBlocoData] = blocos.filter(b => b.id !== dragBloco);
+    // Adicionar ao dia destino
+    if(!ST.sched.blocks[targetData]) ST.sched.blocks[targetData] = [];
+    bloco.data = targetData;
+    ST.sched.blocks[targetData].push(bloco);
+
+    save();
+    renderCronoIASemana();
+    showToast('Bloco movido! ✓');
+    dragBloco = null;
+    dragBlocoData = null;
+  });
+}
+
+/* ════════════════════════════════════════
+   CONTEXT ENGINEERING — Assistente IA
+   Prompt estruturado com XML para análise profunda
+════════════════════════════════════════ */
+function gerarContextoEstudante(){
+  const an = analisarAssistente();
+  if(!an) return null;
+
+  const hoje = today();
+  const ss = ST.sessions;
+  const totalH = Math.round(totalMin(ss) / 60 * 10) / 10;
+  const diasAtivos = uniqueDays(ss);
+  const streak = calcStreak();
+
+  // Histórico das últimas 2 semanas estruturado
+  const ultimas2semanas = ss
+    .filter(s => s.data >= new Date(Date.now() - 14*86400000).toISOString().slice(0,10))
+    .sort((a,b) => b.data.localeCompare(a.data))
+    .slice(0, 20);
+
+  // Top pontos fracos com contexto rico
+  const pontosFracos = an.fracos.slice(0,5).map(f => ({
+    materia: f.mat,
+    taxa: f.taxa + '%',
+    diasSemEstudar: f.dias,
+    totalHoras: Math.round(f.minTotal/60*10)/10 + 'h',
+    frequencia: f.freq + ' sessões'
+  }));
+
+  // Contexto estruturado em XML (melhor para Claude)
+  return {
+    resumo: {
+      totalHoras: totalH,
+      diasAtivos,
+      streak,
+      projetos: ST.projects.length,
+      sugestoes: an.top3.map(t => t.mat),
+      pontosFracos: pontosFracos.map(p => p.materia),
+      pontoFortes: an.fortes.map(f => f.mat),
+    },
+    analise: an,
+    historico: ultimas2semanas
+  };
+}
+
+function renderAssistenteDashboard(){
+  const an = analisarAssistente();
+  const ctx = gerarContextoEstudante();
+  const el = document.getElementById('dashAssistente');
+  if(!el) return;
+
+  if(!an || !an.top3.length){
+    el.innerHTML = `<div style="padding:16px;text-align:center">
+      <div style="font-size:1.5rem;margin-bottom:8px">🤖</div>
+      <div style="font-size:.82rem;color:var(--t2);font-weight:600">Registre suas primeiras sessões</div>
+      <div style="font-size:.72rem;color:var(--t3);margin-top:4px">O assistente analisará seu desempenho</div>
+    </div>`;
+    return;
+  }
+
+  const hoje = new Date().toLocaleDateString('pt-BR', {weekday:'long', day:'numeric', month:'long'});
+  const qualidade = ctx.resumo.streak >= 7 ? '🔥 Em chamas!' : ctx.resumo.streak >= 3 ? '⚡ Bom ritmo!' : '💪 Continue!';
+
+  el.innerHTML = `
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+      <span style="font-size:1.3rem">🤖</span>
+      <div>
+        <div style="font-size:.82rem;font-weight:800;color:var(--t1)">Assistente de Estudo</div>
+        <div style="font-size:.7rem;color:var(--t3)">${hoje} · ${qualidade}</div>
+      </div>
+      <a href="#" onclick="goTo('assistente');return false" style="margin-left:auto;font-size:.7rem;color:var(--p);font-weight:700;text-decoration:none">Ver tudo →</a>
+    </div>
+    <div style="font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:8px">📋 ESTUDE HOJE:</div>
+    ${an.top3.map((t, i) => `
+      <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg3);border-radius:var(--r);margin-bottom:6px;border-left:3px solid ${t.taxa !== null && t.taxa < 60 ? 'var(--red)' : 'var(--p)'}">
+        <div style="width:22px;height:22px;border-radius:6px;background:var(--pg);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;color:#fff;flex-shrink:0">${i+1}</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:.82rem;font-weight:700;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${t.mat}</div>
+          <div style="font-size:.65rem;color:var(--t3)">${t.tipo||'Teoria'} · ${t.taxa !== null ? t.taxa+'% acerto' : 'Sem dados'}</div>
+        </div>
+        <span style="font-size:.65rem;font-weight:700;color:${t.dias === 0 ? 'var(--green)' : t.dias > 3 ? 'var(--red)' : 'var(--amber)'}">${t.dias === 0 ? 'Hoje ✓' : t.dias+'d atrás'}</span>
+      </div>
+    `).join('')}
+    ${an.alertas.length ? `<div style="margin-top:8px;padding:8px 12px;background:var(--rs);border-radius:var(--r);font-size:.72rem;color:var(--red)">⚠️ ${an.alertas[0].msg}</div>` : ''}
+  `;
+}
+
 /* ════════════════════════════════════════
    SISTEMA DE ALARME
 ════════════════════════════════════════ */
@@ -5168,6 +5627,10 @@ function iniciarSistemaAlarme(){
 // Boot controlado pelo Firebase Auth (auth.onAuthStateChanged)
 mostrarLogin(); // Mostrar login enquanto verifica auth
 iniciarSistemaAlarme();
+showSkeleton('view-dashboard');
+// Inicializar drag-and-drop e bottom nav
+initDragDrop();
+updateBottomNavBadges();
 </script>
 </body>
 </html>
