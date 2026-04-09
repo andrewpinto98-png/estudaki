@@ -980,6 +980,53 @@ flex-wrap: wrap; gap: 8px;
 }
 .sec-header-left { display: flex; flex-direction: column; gap: 3px; }
 
+/* ── LOGIN SCREEN MELHORADO ── */
+.login-screen { background: var(–bg) !important; }
+.login-card {
+background: var(–bg2) !important;
+border: 1px solid var(–bd2) !important;
+border-radius: var(–rx) !important;
+padding: 40px 28px !important;
+width: 100% !important;
+max-width: 400px !important;
+}
+.login-google-btn {
+display: flex !important;
+align-items: center !important;
+justify-content: center !important;
+gap: 10px !important;
+width: 100% !important;
+padding: 14px !important;
+border-radius: var(–rl) !important;
+border: 1.5px solid var(–bd2) !important;
+background: var(–bg3) !important;
+color: var(–t1) !important;
+font-size: .88rem !important;
+font-weight: 700 !important;
+cursor: pointer !important;
+transition: var(–tr) !important;
+margin-bottom: 20px !important;
+}
+.login-google-btn:hover { background: var(–bg4) !important; border-color: var(–p) !important; }
+.login-google-btn:active { transform: scale(.98) !important; }
+.login-divider {
+text-align: center !important;
+color: var(–t4) !important;
+font-size: .72rem !important;
+margin: 16px 0 !important;
+position: relative !important;
+}
+.login-divider::before, .login-divider::after {
+content: ‘’ !important;
+position: absolute !important;
+top: 50% !important;
+width: 40% !important;
+height: 1px !important;
+background: var(–bd) !important;
+}
+.login-divider::before { left: 0 !important; }
+.login-divider::after { right: 0 !important; }
+
 </style>
 </head>
 <body>
@@ -1798,7 +1845,14 @@ let isSyncing = false;
 // ── AUTENTICAÇÃO ──
 function loginGoogle(){
   const provider = new firebase.auth.GoogleAuthProvider();
-  auth.signInWithPopup(provider).catch(e => mostrarErroLogin(e.message));
+  // iOS Safari bloqueia popups — usar redirect
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  if(isIOS || isSafari){
+    auth.signInWithRedirect(provider).catch(e => mostrarErroLogin(e.message));
+  } else {
+    auth.signInWithPopup(provider).catch(e => mostrarErroLogin(e.message));
+  }
 }
 
 function fazerLogin(){
@@ -5630,9 +5684,17 @@ BOOT
 // Boot controlado pelo Firebase Auth (auth.onAuthStateChanged)
 mostrarLogin(); // Mostrar login enquanto verifica auth
 iniciarSistemaAlarme();
-// Inicializar drag-and-drop e bottom nav
 initDragDrop();
 updateBottomNavBadges();
+// Capturar resultado do redirect (iOS Safari)
+auth.getRedirectResult().then(result => {
+if(result && result.user){
+// Login via redirect funcionou — onAuthStateChanged cuida do resto
+console.log(‘Login via redirect OK’);
+}
+}).catch(e => {
+if(e.code !== ‘auth/no-auth-event’) mostrarErroLogin(e.message);
+});
 </script>
 
 </body>
