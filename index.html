@@ -1944,15 +1944,17 @@ auth.onAuthStateChanged(async user => {
     if(un) un.textContent = user.displayName || user.email.split('@')[0];
     mostrarApp();
     await carregarDoFirestore();
+    // Renderizar tudo após dados carregados
     updateTopbarAvatar();
-    renderDashboard();
-    updateNavBadges();
     updateTopbarXP();
+    updateNavBadges();
+    updateNavBadgeSRS();
     checkBadges();
-    setTimeout(mostrarAlertaLembretes, 1500);
-    updateNavBadgeAssistente();
-updateNavBadgeSRS();
+    renderDashboard();
+    setTimeout(mostrarAlertaLembretes, 2000);
+    setTimeout(updateNavBadgeAssistente, 500);
     iniciarSyncTempoReal();
+    console.log('Boot completo. Projetos:', ST.projects.length, 'Sessões:', ST.sessions.length);
   } else {
     currentUser = null;
     mostrarLogin();
@@ -2458,6 +2460,7 @@ function renderRecentes(){
    PROJETOS
 ════════════════════════════════════════ */
 function renderProjetos(){
+  if(!ST.projects) ST.projects=[];
   updateNavBadges();
   const el=document.getElementById('projLista');
   if(!ST.projects.length){el.innerHTML=`<div class="empty"><div class="empty-ico">🎯</div><div class="empty-t">Nenhum projeto ainda</div><div class="empty-s">Crie seu primeiro projeto para organizar seus estudos.</div><br><button class="btn-prim" onclick="openNewProj()">＋ Criar Projeto</button></div>`;return}
@@ -2977,7 +2980,8 @@ function checkBadges(){
   if(gained)save();
 }
 function renderGami(){
-  const xp=ST.gami.xp;const lvl=getLevel(xp);
+  if(!ST.gami) ST.gami={xp:0,level:1,xpHistory:[],badges:[],streakFreezes:1};
+  const xp=ST.gami.xp||0;const lvl=getLevel(xp);
   const xpCur=getXPForLevel(lvl);const xpNext=getXPForNextLevel(lvl);
   const pct=Math.round((xp-xpCur)/Math.max(1,xpNext-xpCur)*100);
   const levelEmojis=['🌱','📗','📘','📙','⚡','🔥','💡','🎓','🏅','👑','✨','💪','🧠','⚔️','🛡️','💎','👑','🌟','🔱','🏆','🥇','🥈','🥉','🎖️','🎗️','🎀','🌠','🌌','🌀','🏆'];
@@ -3651,6 +3655,7 @@ function getIntelSessions(){
   return ST.sessions;
 }
 function renderInteligencia(){
+  if(!ST.sessions) ST.sessions=[];
   const ss=getIntelSessions();
   const ms=matStats(ss);
   const totH=totalMin(ss);const totQ=totalQ(ss);
@@ -3958,6 +3963,13 @@ function analisarAssistente(){
 }
 
 function renderAssistente(){
+  if(!ST.sessions || ST.sessions.length === 0){
+    ['assistSugestoes','assistAlertas','assistFracos','assistPositivo','assistTopicos','assistSemEstudo'].forEach(id=>{
+      const el=document.getElementById(id);
+      if(el) el.innerHTML='<div class="empty"><div class="empty-ico">🤖</div><div class="empty-t">Registre sessões para ativar a IA</div></div>';
+    });
+    return;
+  }
   const dados = analisarAssistente();
   updateNavBadgeAssistente(dados);
 
@@ -4244,6 +4256,7 @@ function marcarRevisaoConcluida(materia){
 }
 
 function renderRevisoes(){
+  if(!ST.sessions) ST.sessions=[];
   const dados = getDadosSRS();
   updateNavBadgeSRS();
 
